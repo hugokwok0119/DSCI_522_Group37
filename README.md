@@ -2,8 +2,9 @@
 
   - Authors:  Sameel Syed, Hoi Hin Kwok, Lavanya Gupta & Yusheng Li
 
-This is the group 37 data analysis project for DSCI 522 (Data Science workflows); as
-the part of requirements in a course in the Master of Data Science program at the University 
+This project is made as the Group Project for group 37 as the data analysis project for 
+DSCI 522 (Data Science Workflows); as the part of requirements in a course in the Master 
+of Data Science program at the University 
 of British Columbia.
 
 ## About
@@ -14,7 +15,14 @@ measurements to predict whether a newly discovered breast cancer tumour
 is benign (i.e., is not harmful and does not require treatment) or 
 malignant (i.e., is harmful and requires treatment intervention). 
 Our final classifier performed fairly well on an unseen test data set, 
-with an overall accuracy calculated to be 0.99.
+with an overall accuracy calculated to be 0.99. On the 114 test data cases, 
+it correctly predicted 113. 
+It incorrectly predicted 1 case, predicting that a tumour is benign 
+when in fact it is actually malignant. 
+These kind of incorrect predictions could cause the patient 
+to miss out on necessary treatment, 
+and as such we recommend further research to improve the model 
+before it is ready to be put into production in the clinic.
 
 The data set that was used in this project is of digitized breast cancer
 image features created by Dr. William H. Wolberg, W. Nick Street, and
