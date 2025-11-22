@@ -43,6 +43,28 @@ physicians.
 The final report can be found
 [here](https://github.com/hugokwok0119/DSCI_522_Group37/blob/main/notebooks/breast_cancer_predictor_report.html).
 
+## Usage
+
+First time running the project,
+run the following from the root of this repository:
+
+``` bash
+conda-lock install --name breast-cancer-predictor conda-lock.yml
+```
+
+To run the analysis,
+run the following from the root of this repository:
+
+``` bash
+jupyter lab 
+```
+
+Open `notebooks/breast_cancer_predict_report.ipynb` in Jupyter Lab
+and under Switch/Select Kernel choose 
+"Python [conda env:MDS_Group37]".
+
+Next, under the "Kernel" menu click "Restart Kernel and Run All Cells...".
+
 ## Dependencies
 
 - `conda` (version 23.9.0 or higher)
