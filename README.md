@@ -43,35 +43,67 @@ physicians.
 The final report can be found
 [here](https://github.com/hugokwok0119/DSCI_522_Group37/blob/main/notebooks/breast_cancer_predictor_report.html).
 
+## Dependencies
+- [Docker](https://www.docker.com/) 
+- [VS Code](https://code.visualstudio.com/download)
+- [VS Code Jupyter Extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
+
 ## Usage
 
-First time running the project,
-run the following from the root of this repository:
+### Setup
 
-``` bash
-conda-lock install --name breast-cancer-predictor conda-lock.yml
+> If you are using a Windows or Mac PC, make sure Docker Desktop is running.
+
+1. Please clone this GitHub repository.
+
+### Running the analysis
+
+1. Navigate to the root of this project on your computer using the
+   command line and enter the following command:
+
+``` 
+docker compose up
 ```
 
-To run the analysis,
-run the following from the root of this repository:
+2. In the terminal, look for a URL that starts with 
+`http://127.0.0.1:8888/lab?token=` 
+(for an example, see the highlighted text in the terminal below). 
+Copy and paste that URL into your browser.
 
-``` bash
-jupyter lab 
-```
+<img src="img/jupyter-container-web-app-launch-url.png" width=400>
 
-Open `notebooks/breast_cancer_predict_report.ipynb` in Jupyter Lab
-and under Switch/Select Kernel choose 
-"Python [conda env:MDS_Group37]".
+3. To run the analysis now,
+open `src/breast_cancer_predict_report.ipynb` in Jupyter Lab you just launched
+and under the "Kernel" menu click "Restart Kernel and Run All Cells...".
 
-Next, under the "Kernel" menu click "Restart Kernel and Run All Cells...".
+### Clean up
 
-## Dependencies
+1. To shut down the container and clean up the resources, 
+type `Cntrl` + `C` in the terminal
+where you launched the container, and then type `docker compose rm`
 
+## Developer notes
+
+### Developer dependencies
 - `conda` (version 23.9.0 or higher)
 - `conda-lock` (version 2.5.7 or higher)
-- `jupyterlab` (version 4.0.0 or higher)
-- `nb_conda_kernels` (version 2.3.1 or higher)
-- Python and packages listed in [`environment.yml`](environment.yml)
+
+### Adding any new dependency
+
+1. Add the new dependency to the `environment.yml` file on a new branch.
+
+2. Run `conda-lock -k explicit --file environment.yml -p linux-64` to update the `conda-linux-64.lock` file.
+
+2. Ensure to re-build the Docker image locally to ensure it builds and runs properly.
+
+3. Push the made changes to GitHub. A new Docker
+   image will be built and pushed to Docker Hub automatically.
+   It will be tagged with the SHA for the commit that changed the file.
+
+4. Update the `docker-compose.yml` file on your branch to use the new
+   container image (make sure to update the tag specifically).
+
+5. Send a pull request to merge the changes into the `main` branch.
 
 ## License
 
