@@ -21,9 +21,11 @@ dependencies:
   - notebook=6.5.4
   - jupyter_contrib_nbextensions=0.7.0
   
-
   - pip 
   # altair_ally
   - pip:
     - altair_ally>=0.1.1
     - ucimlrepo
+    # validation
+    - deepchecks[tabular]
+    - anywidget
