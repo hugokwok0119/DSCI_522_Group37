@@ -76,6 +76,39 @@ Copy and paste that URL into your browser.
 open `src/breast_cancer_predict_report.ipynb` in Jupyter Lab you just launched
 and under the "Kernel" menu click "Restart Kernel and Run All Cells...".
 
+To run the analysis, open a terminal and run the following commands:
+
+The scripts has a given default arguments for analysis. The simplify version is:
+```
+# 1. Download Data
+python scripts/1_download_data.py
+
+# 2. Clean Data
+python scripts/2_clean_data.py
+
+# 3. EDA Analysis
+python scripts/3_eda.py
+```
+
+The complete version with explicit arguments is:
+```
+# 1. Download Data
+python scripts/1_download_data.py \
+   --dataset-id 17 \
+   --output-file data/raw/breast_cancer_raw.csv
+
+# 2. Clean Data
+python scripts/2_clean_data.py \
+   --input-file data/raw/breast_cancer_raw.csv \
+   --output-file data/processed/breast_cancer_cleaned.csv
+
+# 3. EDA Analysis
+python scripts/3_EDA.py \
+   --input-file data/processed/breast_cancer_cleaned.csv \
+   --output-dir results
+```
+
+
 ### Clean up
 
 1. To shut down the container and clean up the resources, 

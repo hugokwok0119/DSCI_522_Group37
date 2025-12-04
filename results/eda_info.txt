@@ -1,0 +1,38 @@
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 569 entries, 0 to 568
+Data columns (total 31 columns):
+ #   Column                  Non-Null Count  Dtype  
+---  ------                  --------------  -----  
+ 0   radius_mean             569 non-null    float64
+ 1   texture_mean            569 non-null    float64
+ 2   perimeter_mean          569 non-null    float64
+ 3   area_mean               569 non-null    float64
+ 4   smoothness_mean         569 non-null    float64
+ 5   compactness_mean        569 non-null    float64
+ 6   concavity_mean          569 non-null    float64
+ 7   concave_points_mean     569 non-null    float64
+ 8   symmetry_mean           569 non-null    float64
+ 9   fractal_dimension_mean  569 non-null    float64
+ 10  radius_se               569 non-null    float64
+ 11  texture_se              569 non-null    float64
+ 12  perimeter_se            569 non-null    float64
+ 13  area_se                 569 non-null    float64
+ 14  smoothness_se           569 non-null    float64
+ 15  compactness_se          569 non-null    float64
+ 16  concavity_se            569 non-null    float64
+ 17  concave_points_se       569 non-null    float64
+ 18  symmetry_se             569 non-null    float64
+ 19  fractal_dimension_se    569 non-null    float64
+ 20  radius_max              569 non-null    float64
+ 21  texture_max             569 non-null    float64
+ 22  perimeter_max           569 non-null    float64
+ 23  area_max                569 non-null    float64
+ 24  smoothness_max          569 non-null    float64
+ 25  compactness_max         569 non-null    float64
+ 26  concavity_max           569 non-null    float64
+ 27  concave_points_max      569 non-null    float64
+ 28  symmetry_max            569 non-null    float64
+ 29  fractal_dimension_max   569 non-null    float64
+ 30  Diagnosis               569 non-null    object 
+dtypes: float64(30), object(1)
+memory usage: 137.9+ KB
