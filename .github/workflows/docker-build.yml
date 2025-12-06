@@ -2,7 +2,7 @@ name: Update Lock Files and Build Docker Image
 
 on:
   push:
-    # trigger when any one of these files have been changed
+    # trigger when any one of only these files have been changed
     paths:
       - 'environment.yml'
       - 'Dockerfile'
