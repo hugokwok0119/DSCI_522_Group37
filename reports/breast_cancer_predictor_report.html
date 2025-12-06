@@ -157,18 +157,48 @@ Figure&nbsp;1: No outlier or anomalous values
 <ul>
 <li>We validate that the target variable <code>Diagnosis</code> is not severely imbalanced. If one class is much rarer than the other, this can hurt model performance and may require special handling (for example, resampling or adjusting evaluation metrics).</li>
 </ul>
+<div id="fig-valid9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-valid9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/images/valid_9.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-valid9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Target/response variable follows expected distribution
+</figcaption>
+</figure>
+</div>
 <ol start="10" type="1">
 <li>No anomalous correlations between target and features</li>
 </ol>
 <ul>
 <li>We check how strongly each feature is associated with <code>Diagnosis</code>. Extremely high predictive power for a single feature can indicate data leakage or unexpected dependencies that should be investigated.</li>
 </ul>
+<div id="fig-valid10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-valid10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/images/valid_10.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-valid10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: No anomalous correlations between target and features
+</figcaption>
+</figure>
+</div>
 <ol start="11" type="1">
 <li>No anomalous correlations between features</li>
 </ol>
 <ul>
 <li>We examine pairwise correlations between features. If many feature pairs are highly correlated, this suggests redundancy or multicollinearity, which may require feature selection or dimensionality reduction.</li>
 </ul>
+<div id="fig-valid11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-valid11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/images/valid_10.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-valid11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: No anomalous correlations between features
+</figcaption>
+</figure>
+</div>
 <p>The <code>FeatureFeatureCorrelation</code> check fails the condition we set. In our data there are many feature pairs with very high correlation, for example <code>radius_mean</code>, <code>perimeter_mean</code> and <code>area_mean</code>, as well as their corresponding <code>_max</code> and <code>_se</code> versions. This pattern is expected for this dataset because these variables all describe related geometric properties of the tumor, so strong correlations are not a data quality error but a sign of redundancy and multicollinearity.</p>
 </section>
 <section id="data-profiling-structure-and-statistics" class="level3">
@@ -187,7 +217,7 @@ Figure&nbsp;1: No outlier or anomalous values
 <img src="../results/images/corr_chart.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr_chart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Multicollinearity
+Figure&nbsp;5: Multicollinearity
 </figcaption>
 </figure>
 </div>
@@ -202,7 +232,7 @@ Figure&nbsp;2: Multicollinearity
 <img src="../results/images/pair_chart.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pair_chart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Pairwise Separability
+Figure&nbsp;6: Pairwise Separability
 </figcaption>
 </figure>
 </div>
@@ -217,7 +247,7 @@ Figure&nbsp;3: Pairwise Separability
 <img src="../results/images/dist_chart.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dist_chart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Distribution Analysis
+Figure&nbsp;7: Distribution Analysis
 </figcaption>
 </figure>
 </div>
@@ -272,7 +302,7 @@ Figure&nbsp;4: Distribution Analysis
 <img src="../results/images/svm_heatmap.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-svm_heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Heatmap for SVM GridSearchCV Mean Test Score
+Figure&nbsp;8: Heatmap for SVM GridSearchCV Mean Test Score
 </figcaption>
 </figure>
 </div>
@@ -282,7 +312,7 @@ Figure&nbsp;5: Heatmap for SVM GridSearchCV Mean Test Score
 <img src="../results/images/con_mat_heatmap.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-con_mat_heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Heatmap for Confusion Matrix
+Figure&nbsp;9: Heatmap for Confusion Matrix
 </figcaption>
 </figure>
 </div>
