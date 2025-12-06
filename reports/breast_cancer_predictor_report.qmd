@@ -8,7 +8,9 @@ jupyter:
 format:
   pdf:
     documentclass: article
-
+    toc: true          #enabling table of contents
+    toc-depth: 3       #including the headings
+    number-sections: true   # for section numbering
 bibliography: references.bib
 execute:
     echo: false
@@ -87,6 +89,7 @@ The dataset is complete (no missing values). However, `describe()` reveals massi
 * **Pearson Correlation:** Measures linear relationships.
 * **Spearman Correlation:** Measures monotonic rank relationships (non-linear).
 Comparing both helps identify if relationships are strictly linear or just trending in the same direction.
+
 
 **Purpose:**
 To detect **Multicollinearity**—redundant features that increase model complexity without adding information.
