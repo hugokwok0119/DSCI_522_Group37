@@ -21,6 +21,7 @@ dependencies:
   - notebook=6.5.4
   - jupyter_contrib_nbextensions=0.7.0
   
+  - click=8.3.1 # Milestone 3
 
   - pip 
   # altair_ally
