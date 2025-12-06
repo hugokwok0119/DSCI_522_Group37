@@ -67,11 +67,17 @@ Post-scaling inspection reveals numerous outliers (points beyond whiskers), part
 9. Target/response variable follows expected distribution
 * We validate that the target variable `Diagnosis` is not severely imbalanced. If one class is much rarer than the other, this can hurt model performance and may require special handling (for example, resampling or adjusting evaluation metrics).
 
+![Target/response variable follows expected distribution](../results/images/valid_9.png){#fig-valid9}
+
 10. No anomalous correlations between target and features
 * We check how strongly each feature is associated with `Diagnosis`. Extremely high predictive power for a single feature can indicate data leakage or unexpected dependencies that should be investigated.
 
+![No anomalous correlations between target and features](../results/images/valid_10.png){#fig-valid10}
+
 11. No anomalous correlations between features
 * We examine pairwise correlations between features. If many feature pairs are highly correlated, this suggests redundancy or multicollinearity, which may require feature selection or dimensionality reduction.
+
+![No anomalous correlations between features](../results/images/valid_10.png){#fig-valid11}
 
 The `FeatureFeatureCorrelation` check fails the condition we set. In our data there are many feature pairs with very high correlation, for example `radius_mean`, `perimeter_mean` and `area_mean`, as well as their corresponding `_max` and `_se` versions. This pattern is expected for this dataset because these variables all describe related geometric properties of the tumor, so strong correlations are not a data quality error but a sign of redundancy and multicollinearity.
 
