@@ -78,6 +78,10 @@ and under the "Kernel" menu click "Restart Kernel and Run All Cells...".
 
 The scripts has a given default arguments for analysis. The simplify version is:
 
+To run the analysis, open a terminal and run the following commands:
+
+The scripts has a given default arguments for analysis. The simplify version is:
+```
 # 1. Download Data
 python scripts/1_download_data.py
 
