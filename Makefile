@@ -12,7 +12,7 @@ all: ## runs the targets: cl, env, build
 	make build
 
 .PHONY: cl
-make cl: ## create conda lock for multiple platforms
+cl: ## create conda lock for multiple platforms
 	# the linux-aarch64 is used for ARM Macs using linux docker container
 	conda-lock lock \
 		--file environment.yml \
@@ -20,7 +20,6 @@ make cl: ## create conda lock for multiple platforms
 		-p osx-64 \
 		-p osx-arm64 \
 		-p win-64 \
-		-p linux-aarch64
 
 
 .PHONY: env
