@@ -1,13 +1,13 @@
 name: MDS_Group37
 channels:
   - conda-forge
-  - defaults
+
 dependencies:
   # core relies
   - python=3.11.6
   - pandas=2.1.2
   - scikit-learn=1.3.2
-  - altair=5.1.2  # 保持 5.1.2，但 altair_ally 通常兼容 5.x 版本
+  - altair=5.1.2  
   
   # plotting relies
   - vegafusion=1.4.3
@@ -20,7 +20,8 @@ dependencies:
   - requests=2.31.0
   - notebook=6.5.4
   - jupyter_contrib_nbextensions=0.7.0
-  
+
+  - click=8.3.1 # Milestone 3
 
   - pip 
   # altair_ally
