@@ -10,7 +10,6 @@ format:
     documentclass: article
     toc: true          #enabling table of contents
     toc-depth: 3       #including the headings
-    number-sections: true   # for section numbering
 bibliography: references.bib
 execute:
     echo: false
