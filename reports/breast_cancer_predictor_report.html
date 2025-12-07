@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.7.33">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -46,15 +46,14 @@ div.csl-indent {
 <script src="breast_cancer_predictor_report_files/libs/clipboard/clipboard.min.js"></script>
 <script src="breast_cancer_predictor_report_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="breast_cancer_predictor_report_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="breast_cancer_predictor_report_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="breast_cancer_predictor_report_files/libs/quarto-html/popper.min.js"></script>
 <script src="breast_cancer_predictor_report_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="breast_cancer_predictor_report_files/libs/quarto-html/anchor.min.js"></script>
 <link href="breast_cancer_predictor_report_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="breast_cancer_predictor_report_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="breast_cancer_predictor_report_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="breast_cancer_predictor_report_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="breast_cancer_predictor_report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="breast_cancer_predictor_report_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="breast_cancer_predictor_report_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -70,7 +69,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+      if (mathElements[i].tagName == "SPAN") {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -135,12 +134,12 @@ window.Quarto = {
 <li><p>Missingness Within Expected Threshold A threshold of 5% missingness per column was applied. No columns exceeded this limit, ensuring all features are sufficiently complete for reliable modeling.</p></li>
 </ul>
 <p>By combining schema mapping with these validation checks, the dataset is fully consistent, correctly formatted, and reproducible, providing a robust foundation for downstream modeling and analysis.</p>
-<div id="fig-valid7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-feature_distibution" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-valid7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../results/images/valid_7.png" class="img-fluid figure-img">
+<div aria-describedby="fig-feature_distibution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/images/feature_distributions.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-valid7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-feature_distibution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: No outlier or anomalous values
 </figcaption>
 </figure>
@@ -157,44 +156,44 @@ Figure&nbsp;1: No outlier or anomalous values
 <ul>
 <li>We validate that the target variable <code>Diagnosis</code> is not severely imbalanced. If one class is much rarer than the other, this can hurt model performance and may require special handling (for example, resampling or adjusting evaluation metrics).</li>
 </ul>
-<div id="fig-valid9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-class_imblance" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-valid9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../results/images/valid_9.png" class="img-fluid figure-img">
+<div aria-describedby="fig-class_imblance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/images/class_imbalance.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-valid9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-class_imblance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Target/response variable follows expected distribution
 </figcaption>
 </figure>
 </div>
-<ol start="10" type="1">
+<ol type="1">
 <li>No anomalous correlations between target and features</li>
 </ol>
 <ul>
 <li>We check how strongly each feature is associated with <code>Diagnosis</code>. Extremely high predictive power for a single feature can indicate data leakage or unexpected dependencies that should be investigated.</li>
 </ul>
-<div id="fig-valid10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-feature_label_corr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-valid10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../results/images/valid_10.png" class="img-fluid figure-img">
+<div aria-describedby="fig-feature_label_corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/images/feature_label_corr.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-valid10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-feature_label_corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: No anomalous correlations between target and features
 </figcaption>
 </figure>
 </div>
-<ol start="11" type="1">
+<ol type="1">
 <li>No anomalous correlations between features</li>
 </ol>
 <ul>
 <li>We examine pairwise correlations between features. If many feature pairs are highly correlated, this suggests redundancy or multicollinearity, which may require feature selection or dimensionality reduction.</li>
 </ul>
-<div id="fig-valid11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-feature_feature_corr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-valid11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../results/images/valid_10.png" class="img-fluid figure-img">
+<div aria-describedby="fig-feature_feature_corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/images/feature_feature_corr.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-valid11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-feature_feature_corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4: No anomalous correlations between features
 </figcaption>
 </figure>
@@ -394,14 +393,13 @@ Wolberg, Alisa S, Dougald M Monroe, Harold R Roberts, and Maureane Hoffman. 2003
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
