@@ -1,5 +1,6 @@
 ---
 title: 'Exploratory Data Analysis: Wisconsin Diagnostic Breast Cancer (WDBC)'
+author: 'Hoi Hin Kwok, Sameel Syed, Lavanya Gupta & Yusheng Li'
 jupyter:
   kernelspec:
     display_name: Python [conda env:MDS_Group37]
