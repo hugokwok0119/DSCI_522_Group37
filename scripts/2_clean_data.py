@@ -1,6 +1,7 @@
 import os
 import click
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 @click.command()
 @click.option('--input-file', '-i',
@@ -72,6 +73,18 @@ def main(input_file, output_file):
         
         df.to_csv(output_file, index=False)
         click.echo(click.style(f"Successfully saved processed data to {output_file}", fg='green'))
+        
+        
+        
+        clean_train_df, clean_test_df = train_test_split(
+            df, test_size=0.2, random_state=123, stratify=df['Diagnosis']
+        )
+        clean_train_df.to_csv('data/processed/clean_train.csv', index=False)
+        clean_test_df.to_csv('data/processed/clean_test.csv', index=False)
+        
+        click.echo(click.style(f"Successfully saved split processed data to {output_file}", fg='green'))
+        
+        
 
     except Exception as e:
         click.echo(click.style(f"Processing failed: {e}", fg='red'))
