@@ -1,173 +1,195 @@
 # Breast Cancer Predictor
 
-  - Authors:  Sameel Syed, Hoi Hin Kwok, Lavanya Gupta & Yusheng Li
+**Authors**: Sameel Syed, Hoi Hin Kwok, Lavanya Gupta & Yusheng Li
 
-This project is made as the Group Project for group 37 as the data analysis project for 
-DSCI 522 (Data Science Workflows); as the part of requirements in a course in the Master 
-of Data Science program at the University 
-of British Columbia.
+A reproducible data analysis project investigating breast cancer tumor classification using Support Vector Machines (SVM). This project is part of the DSCI 522 (Data Science Workflows) course in the Master of Data Science program at the University of British Columbia.
 
-## About
+## Project Overview
 
-Here we attempt to build a Breast Cancer classification model using the SVC 
-algorithm which can use breast cancer tumour image 
-measurements to predict whether a newly discovered breast cancer tumour 
-is benign (i.e., is not harmful and does not require treatment) or 
-malignant (i.e., is harmful and requires treatment intervention). 
-Our final classifier performed fairly well on an unseen test data set, 
-with an overall accuracy calculated to be 0.99. On the 114 test data cases, 
-it correctly predicted 113. 
-It incorrectly predicted 1 case, predicting that a tumour is benign 
-when in fact it is actually malignant. 
-These kind of incorrect predictions could cause the patient 
-to miss out on necessary treatment, 
-and as such we recommend further research to improve the model 
-before it is ready to be put into production in the clinic.
+### The Challenge
+Breast cancer diagnosis often relies on the visual interpretation of fine needle aspirate (FNA) images. The core challenge is to accurately distinguish between **benign** (non-harmful) and **malignant** (harmful) tumors based on geometric measurements of cell nuclei. In this medical context, minimizing false negatives is critical, as missing a malignant case can delay necessary life-saving treatment.
 
-The data set that was used in this project is of digitized breast cancer
-image features created by Dr. William H. Wolberg, W. Nick Street, and
-Olvi L. Mangasarian at the University of Wisconsin, Madison (Street,
-Wolberg, and Mangasarian 1993). It was sourced from the UCI Machine
-Learning Repository (Dua and Graff 2017) and can be found
-[here](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+\(Diagnostic\)),
-specifically [this
-file](http://mlr.cs.umass.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data).
-Each row in the data set represents summary statistics from measurements
-of an image of a tumour sample, including the diagnosis (benign or
-malignant) and several other measurements (e.g., nucleus texture,
-perimeter, area, etc.). Diagnosis for each image was conducted by
-physicians.
+### The Solution
+We developed a binary classification model using the **Support Vector Machine (SVM)** algorithm with **GridSearchCV** for hyperparameter tuning. The pipeline features a robust data validation framework and automated reproducibility.
+
+## Key Analysis Insights
+
+Our exploratory data analysis (EDA) revealed critical patterns that directly informed our modeling strategy:
+
+* **Handling Skewed Data**: We observed that features like `Area` and `Perimeter` spanned vast magnitudes (values > 2000) compared to features like `Smoothness` (< 0.1). We applied **Symmetric Log (Symlog) transformation** to visualize these distributions effectively without losing information from extreme values.
+* **Outliers as Signals**: Statistical outliers were detected, particularly in malignant samples. Domain investigation confirmed these were not data errors but characteristic biological signals of tumor growth; thus, they were retained to preserve diagnostic information.
+* **Multicollinearity Strategy**: We identified near-perfect correlation between `Radius`, `Perimeter`, and `Area`. To improve model stability, we identified these as geometrically redundant and prioritized feature selection.
+
+## Model Performance
+
+The final SVM model achieved strong predictive power on the unseen test set (UCI Machine Learning Repository).
+
+* **Overall Accuracy**: 99%
+* **Test Set Performance**: Correctly predicted **113 out of 114** cases.
+* **Critical Evaluation**: The model produced **1 False Negative** (predicting benign when actual was malignant). While statistically excellent, we discuss the clinical risks of this single error in our full report and suggest future cost-sensitive training methods to mitigate this risk.
 
 ## Report
 
-The final report can be found
-[here](https://github.com/hugokwok0119/DSCI_522_Group37/blob/main/notebooks/breast_cancer_predictor_report.html).
+The full analysis, including code and visualizations, can be viewed here:
+[**Read the Full Analysis Report**](reports/breast_cancer_predictor_report.pdf)
 
-## Dependencies
-- [Docker](https://www.docker.com/) 
-- [VS Code](https://code.visualstudio.com/download)
-- [VS Code Jupyter Extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
+## Project Structure
+
+```text
+root/
+├── data/
+│   ├── processed/          # Cleaned data ready for modelling
+│   └── raw/                # Immutable original data
+├── notebooks/              # Jupyter notebooks for exploration
+├── reports/                # Generated analysis reports
+│   ├── breast_cancer_predictor_report.pdf
+│   ├── breast_cancer_predictor_report.html
+│   └── references.bib
+├── results/                # Exported artifacts
+├── scripts/                # Source code for the pipeline
+│   ├── 1_download_data.py
+│   ├── 2_clean_data.py
+│   ├── 3_eda.py
+│   └── 4_model.py
+├── Dockerfile              # Container definition
+├── docker-compose.yml      # Service orchestration
+├── Makefile                # Automation commands
+├── environment.yml         # Local dependency lock
+└── README.md
 
 ## Usage
 
-### Setup
+To ensure reproducibility, we support two execution methods.
 
-> If you are using a Windows or Mac PC, make sure Docker Desktop is running.
+### Method 1: Using Docker (Recommended)
 
-1. Please clone this GitHub repository.
+Ensure [Docker Desktop](https://www.docker.com/products/docker-desktop/) is installed and running.
 
-### Running the analysis
+1.  **Clone the repository:**
 
-1. Navigate to the root of this project on your computer using the
-   command line and enter the following command:
+    ```bash
+    git clone [https://github.com/hugokwok0119/DSCI_522_Group37.git](https://github.com/hugokwok0119/DSCI_522_Group37.git)
+    cd DSCI_522_Group37
+    ```
 
-``` 
-docker compose up
-```
+2.  **Run the analysis:**
+    To execute the entire pipeline (download, clean, analyze, and report) and launch the Jupyter Lab interface:
 
-2. In the terminal, look for a URL that starts with 
-`http://127.0.0.1:8888/lab?token=` 
-(for an example, see the highlighted text in the terminal below). 
-Copy and paste that URL into your browser.
+    ```bash
+    docker compose up
+    ```
 
-<img src="img/jupyter-container-web-app-launch-url.png" width=400>
+3.  **Access Jupyter Lab:**
+    Look for a URL in the terminal starting with `http://127.0.0.1:8888/lab?token=...`. Copy and paste this into your browser.
 
-3. To run the analysis now,
-open `notebooks/breast_cancer_predict_report.ipynb` in Jupyter Lab you just launched
-and under the "Kernel" menu click "Restart Kernel and Run All Cells...".
+4. **Run Makefile commands inside Jupyter terminal:**
+    Open a new terminal in Jupyter Lab and run:
 
-The scripts has a given default arguments for analysis. The simplify version is:
+    ```bash
+    make all
+    ```
 
-To run the analysis, open a terminal and run the following commands:
+    *(To reset the project state, run `make clean`)*
 
-The scripts has a given default arguments for analysis. The simplify version is:
-```
-# 1. Download Data
-python scripts/1_download_data.py
+5.  **Clean up:**
+    To shut down the container and remove resources:
 
-# 2. Clean Data
-python scripts/2_clean_data.py
+    ```bash
+    docker compose rm
+    ```
 
-# 3. EDA Analysis
-python scripts/3_eda.py
+### Method 2: Local Development
 
-# 4. Modelling
-python scripts/4_model.py
-```
+If you prefer to run the project locally, ensure you have `conda` installed.
 
-The complete version with explicit arguments is:
-```
-# 1. Download Data
-python scripts/1_download_data.py \
-   --dataset-id 17 \
-   --output-file data/raw/breast_cancer_raw.csv
+1.  **Setup Environment:**
 
-# 2. Clean Data
-python scripts/2_clean_data.py \
-   --input-file data/raw/breast_cancer_raw.csv \
-   --output-file data/processed/breast_cancer_cleaned.csv
+    ```bash
+    conda env create -f environment.yml
+    conda activate MDS_group37
+    ```
 
-# 3. EDA Analysis
-python scripts/3_EDA.py \
-   --input-file data/processed/breast_cancer_cleaned.csv \
-   --output-dir results
+2.  **Run with Make (Automated):**
+    Since a `Makefile` is provided, you can run the entire analysis with one command:
 
-# 4 . Modelling
-python scripts/4_model.py \
-   --input-file data/processed/breast_cancer_cleaned.csv \
-   --output-dir results
-To run the analysis, open a terminal and run the following commands:
+    ```bash
+    make all
+    ```
 
-```
+    *(To reset the project state, run `make clean`)*
 
+3.  **Run Scripts Manually (Alternative):**
+    If you wish to run the steps individually via the terminal:
 
+    Using defalut value:
+    ```bash
+    # 1. Download Data
+    python scripts/1_download_data.py
 
-### Clean up
+    # 2. Clean Data
+    python scripts/2_clean_data.py
 
-1. To shut down the container and clean up the resources, 
-type `Cntrl` + `C` in the terminal
-where you launched the container, and then type `docker compose rm`
+    # 3. Exploratory Data Analysis
+    python scripts/3_eda.py
 
-## Developer notes
+    # 4. Modelling
+    python scripts/4_model.py
+    ```
+   
+   Or specifying input/output paths:
 
-### Developer dependencies
-- `conda` (version 23.9.0 or higher)
-- `conda-lock` (version 2.5.7 or higher)
+    ```bash
+    # 1. Download Data
+    python scripts/1_download_data.py \
+       --dataset-id 17 \
+       --output-file data/raw/breast_cancer_raw.csv
 
-### Adding any new dependency
+    # 2. Clean Data
+    python scripts/2_clean_data.py \
+       --input-file data/raw/breast_cancer_raw.csv \
+       --output-file data/processed/breast_cancer_cleaned.csv
 
-1. Add the new dependency to the `environment.yml` file on a new branch.
+    # 3. Exploratory Data Analysis
+    python scripts/3_eda.py \
+       --input-file data/processed/breast_cancer_cleaned.csv \
+       --output-dir results
 
-2. Run `conda-lock -k explicit --file environment.yml -p linux-64` to update the `conda-linux-64.lock` file.
+    # 4. Modelling
+    python scripts/4_model.py \
+       --input-file data/processed/breast_cancer_cleaned.csv \
+       --output-dir results
+    ```
 
-2. Ensure to re-build the Docker image locally to ensure it builds and runs properly.
+## Data Source
 
-3. Push the made changes to GitHub. A new Docker
-   image will be built and pushed to Docker Hub automatically.
-   It will be tagged with the SHA for the commit that changed the file.
+The data used in this project is the **Breast Cancer Wisconsin (Diagnostic) Data Set**.
 
-4. Update the `docker-compose.yml` file on your branch to use the new
-   container image (make sure to update the tag specifically).
+  * **Source**: UCI Machine Learning Repository
+  * **Creators**: Dr. William H. Wolberg, W. Nick Street, and Olvi L. Mangasarian (University of Wisconsin, Madison).
+  * **Original URL**: [UCI Archive](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+\(Diagnostic\))
 
-5. Send a pull request to merge the changes into the `main` branch.
+## Developer Notes
+
+### Dependencies
+
+  * Python 3.10+ and standard data science libraries (pandas, scikit-learn, altair).
+  * See `environment.yml` for the complete list.
+
+### Adding Dependencies
+
+1.  Add the new package to `environment.yml`.
+2.  Update the lock file:
+    ```bash
+    conda-lock -k explicit --file environment.yml -p linux-64
+    ```
+3.  Rebuild the Docker image locally to verify.
 
 ## License
 
-The Breast Cancer Predictor report contained herein are licensed under the
-[Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-See [the license file](LICENSE.md) for more information. . If
-re-using/re-mixing please provide attribution and link to this webpage.
-The software code contained within this repository is licensed under the
-MIT license. See [the license file](LICENSE.md) for more information.
+  * **Report & Documentation**: Licensed under the [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+  * **Software Source Code**: Licensed under the [MIT License](https://www.google.com/search?q=LICENSE).
 
 ## References
 
-Dua, Dheeru, and Casey Graff. 2017. “UCI Machine Learning Repository.”
-University of California, Irvine, School of Information; Computer
-Sciences. <http://archive.ics.uci.edu/ml>.
-
-Street, W. Nick, W. H. Wolberg, and O. L. Mangasarian. 1993. “Nuclear
-feature extraction for breast tumor diagnosis.” In *Biomedical Image
-Processing and Biomedical Visualization*, edited by Raj S. Acharya and
-Dmitry B. Goldgof, 1905:861–70. International Society for Optics;
-Photonics; SPIE. <https://doi.org/10.1117/12.148698>.
+1.  **Dua, D. and Graff, C. (2019)**. UCI Machine Learning Repository [http://archive.ics.uci.edu/ml]. Irvine, CA: University of California, School of Information and Computer Science.
+2.  **Street, W.N., Wolberg, W.H., & Mangasarian, O.L. (1993)**. Nuclear feature extraction for breast tumor diagnosis. In *Biomedical Image Processing and Biomedical Visualization* (pp. 861-870). SPIE. doi: 10.1117/12.148698.
