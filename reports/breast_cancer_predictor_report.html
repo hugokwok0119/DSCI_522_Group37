@@ -55,7 +55,7 @@ div.csl-indent {
 <link href="breast_cancer_predictor_report_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="breast_cancer_predictor_report_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="breast_cancer_predictor_report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="breast_cancer_predictor_report_files/libs/bootstrap/bootstrap-49b5e81f420305fe0faeeae9dcc7b2dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="breast_cancer_predictor_report_files/libs/bootstrap/bootstrap-b9152894621c5c71166f363e15b6300a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -93,7 +93,7 @@ window.Quarto = {
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../breast_cancer_predictor_report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="breast_cancer_predictor_report.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -142,7 +142,16 @@ window.Quarto = {
 <li><p>Missingness Within Expected Threshold A threshold of 5% missingness per column was applied. No columns exceeded this limit, ensuring all features are sufficiently complete for reliable modeling.</p></li>
 </ul>
 <p>By combining schema mapping with these validation checks, the dataset is fully consistent, correctly formatted, and reproducible, providing a robust foundation for downstream modeling and analysis.</p>
-<!-- ![No outlier or anomalous values](../results/images/feature_distributions.png){#fig-feature_distibution} -->
+<div id="fig-feature_distibution" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-feature_distibution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/static/feature_distributions.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-feature_distibution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: No outlier or anomalous values
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="outlier-analysis-scaling-strategy" class="level3">
 <h3 class="anchored" data-anchor-id="outlier-analysis-scaling-strategy">Outlier Analysis &amp; Scaling Strategy</h3>
@@ -155,21 +164,48 @@ window.Quarto = {
 <ul>
 <li>We validate that the target variable <code>Diagnosis</code> is not severely imbalanced. If one class is much rarer than the other, this can hurt model performance and may require special handling (for example, resampling or adjusting evaluation metrics).</li>
 </ul>
-<!-- ![Target/response variable follows expected distribution](../results/images/class_imbalance.png){#fig-class_imblance} -->
+<div id="fig-class_imblance" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-class_imblance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/static/class_imbalance.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-class_imblance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Target/response variable follows expected distribution
+</figcaption>
+</figure>
+</div>
 <ol type="1">
 <li>No anomalous correlations between target and features</li>
 </ol>
 <ul>
 <li>We check how strongly each feature is associated with <code>Diagnosis</code>. Extremely high predictive power for a single feature can indicate data leakage or unexpected dependencies that should be investigated.</li>
 </ul>
-<!-- [No anomalous correlations between target and features](../results/images/feature_label_corr.png){#fig-feature_label_corr} -->
+<div id="fig-feature_label_corr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-feature_label_corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/static/feature_label_corr.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-feature_label_corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: No anomalous correlations between target and features
+</figcaption>
+</figure>
+</div>
 <ol type="1">
 <li>No anomalous correlations between features</li>
 </ol>
 <ul>
 <li>We examine pairwise correlations between features. If many feature pairs are highly correlated, this suggests redundancy or multicollinearity, which may require feature selection or dimensionality reduction.</li>
 </ul>
-<!-- [No anomalous correlations between features](../results/images/feature_feature_corr.png){#fig-feature_feature_corr} -->
+<div id="fig-feature_feature_corr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-feature_feature_corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/static/feature_feature_corr.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-feature_feature_corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: No anomalous correlations between features
+</figcaption>
+</figure>
+</div>
 <p>The <code>FeatureFeatureCorrelation</code> check fails the condition we set. In our data there are many feature pairs with very high correlation, for example <code>radius_mean</code>, <code>perimeter_mean</code> and <code>area_mean</code>, as well as their corresponding <code>_max</code> and <code>_se</code> versions. This pattern is expected for this dataset because these variables all describe related geometric properties of the tumor, so strong correlations are not a data quality error but a sign of redundancy and multicollinearity.</p>
 </section>
 <section id="data-profiling-structure-and-statistics" class="level3">
@@ -188,7 +224,7 @@ window.Quarto = {
 <img src="../results/images/corr_chart.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr_chart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Multicollinearity
+Figure&nbsp;5: Multicollinearity
 </figcaption>
 </figure>
 </div>
@@ -197,13 +233,31 @@ Figure&nbsp;1: Multicollinearity
 <h3 class="anchored" data-anchor-id="pairwise-separability-analysis">5. Pairwise Separability Analysis</h3>
 <p><strong>Purpose:</strong> To visualize 2D decision boundaries. We look for feature combinations where the <strong>Benign (Blue)</strong> and <strong>Malignant (Orange)</strong> clusters are clearly distinct with minimal overlap.</p>
 <p><strong>Results:</strong> * <strong>High Separability:</strong> Features related to size (<code>radius_mean</code>) and shape complexity (<code>concavity_mean</code>) separate the classes well. * <strong>Non-linear patterns:</strong> The curved relationship between <code>area</code> and <code>radius</code> is clearly visible, reinforcing the geometric redundancy found in the correlation analysis.</p>
-<!-- [Pairwise Separability](../results/images/pair_chart.png){#fig-pair_chart} -->
+<div id="fig-pair_chart" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pair_chart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/images/pair_chart.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pair_chart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Pairwise Separability
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="distribution-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="distribution-analysis">6. Distribution Analysis</h3>
 <p><strong>Purpose:</strong> To inspect the univariate “shape” of the data. We look for <strong>Skewness</strong> (asymmetry) and <strong>Outliers</strong> that could bias linear models.</p>
 <p><strong>Results:</strong> * <strong>Skewness:</strong> Features like <code>area_se</code> and <code>concavity_mean</code> are heavily <strong>right-skewed</strong> (long tail to the right). This indicates that <strong>Log Transformation</strong> is required to normalize these distributions. * <strong>Overlap:</strong> “Texture” and “Smoothness” show high overlap between classes, suggesting they are less informative on their own compared to “Size” features.</p>
-<!-- [-- Distribution Analysis](../results/images/dist_chart.png){#fig-dist_chart} -->
+<div id="fig-dist_chart" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dist_chart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/images/dist_chart.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dist_chart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Distribution Analysis
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="eda-findings" class="level3">
 <h3 class="anchored" data-anchor-id="eda-findings">EDA Findings</h3>
@@ -255,7 +309,7 @@ Figure&nbsp;1: Multicollinearity
 <img src="../results/images/svm_heatmap.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-svm_heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Heatmap for SVM GridSearchCV Mean Test Score
+Figure&nbsp;8: Heatmap for SVM GridSearchCV Mean Test Score
 </figcaption>
 </figure>
 </div>
@@ -265,7 +319,7 @@ Figure&nbsp;2: Heatmap for SVM GridSearchCV Mean Test Score
 <img src="../results/images/con_mat_heatmap.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-con_mat_heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Heatmap for Confusion Matrix
+Figure&nbsp;9: Heatmap for Confusion Matrix
 </figcaption>
 </figure>
 </div>

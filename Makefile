@@ -38,7 +38,7 @@ reports/breast_cancer_predictor_report.pdf: reports/breast_cancer_predictor_repo
                                              results/images/svm_heatmap.png \
                                              results/images/con_mat_heatmap.png \
                                              results/models/ct.pickle
-	quarto render reports/breast_cancer_predictor_report.qmd --to pdf
+	quarto render reports/breast_cancer_predictor_report.qmd --to typst
 
 clean:
 	rm -rf data/raw/*
