@@ -5,7 +5,7 @@ jupyter:
   kernelspec:
     display_name: Python [conda env:MDS_Group37]
     language: python
-    name: conda-env-MDS_Group37-py
+    name: dockerlock
 format:
   pdf:
     documentclass: article
@@ -49,7 +49,7 @@ A threshold of 5% missingness per column was applied. No columns exceeded this l
 
 By combining schema mapping with these validation checks, the dataset is fully consistent, correctly formatted, and reproducible, providing a robust foundation for downstream modeling and analysis.
 
-![No outlier or anomalous values](../results/images/feature_distributions.png){#fig-feature_distibution}
+<!-- ![No outlier or anomalous values](../results/images/feature_distributions.png){#fig-feature_distibution} -->
 
 ### Outlier Analysis & Scaling Strategy
 
@@ -68,17 +68,17 @@ Post-scaling inspection reveals numerous outliers (points beyond whiskers), part
 9. Target/response variable follows expected distribution
 * We validate that the target variable `Diagnosis` is not severely imbalanced. If one class is much rarer than the other, this can hurt model performance and may require special handling (for example, resampling or adjusting evaluation metrics).
 
-![Target/response variable follows expected distribution](../results/images/class_imbalance.png){#fig-class_imblance}
+<!-- ![Target/response variable follows expected distribution](../results/images/class_imbalance.png){#fig-class_imblance} -->
 
 1.  No anomalous correlations between target and features
 * We check how strongly each feature is associated with `Diagnosis`. Extremely high predictive power for a single feature can indicate data leakage or unexpected dependencies that should be investigated.
 
-![No anomalous correlations between target and features](../results/images/feature_label_corr.png){#fig-feature_label_corr}
+<!-- [No anomalous correlations between target and features](../results/images/feature_label_corr.png){#fig-feature_label_corr} -->
 
 1.  No anomalous correlations between features
 * We examine pairwise correlations between features. If many feature pairs are highly correlated, this suggests redundancy or multicollinearity, which may require feature selection or dimensionality reduction.
 
-![No anomalous correlations between features](../results/images/feature_feature_corr.png){#fig-feature_feature_corr}
+<!-- [No anomalous correlations between features](../results/images/feature_feature_corr.png){#fig-feature_feature_corr} -->
 
 The `FeatureFeatureCorrelation` check fails the condition we set. In our data there are many feature pairs with very high correlation, for example `radius_mean`, `perimeter_mean` and `area_mean`, as well as their corresponding `_max` and `_se` versions. This pattern is expected for this dataset because these variables all describe related geometric properties of the tumor, so strong correlations are not a data quality error but a sign of redundancy and multicollinearity.
 
@@ -113,7 +113,7 @@ To visualize 2D decision boundaries. We look for feature combinations where the 
 * **High Separability:** Features related to size (`radius_mean`) and shape complexity (`concavity_mean`) separate the classes well.
 * **Non-linear patterns:** The curved relationship between `area` and `radius` is clearly visible, reinforcing the geometric redundancy found in the correlation analysis.
 
-![Pairwise Separability](../results/images/pair_chart.png){#fig-pair_chart}
+<!-- [Pairwise Separability](../results/images/pair_chart.png){#fig-pair_chart} -->
 
 ### 6. Distribution Analysis
 **Purpose:**
@@ -123,7 +123,7 @@ To inspect the univariate "shape" of the data. We look for **Skewness** (asymmet
 * **Skewness:** Features like `area_se` and `concavity_mean` are heavily **right-skewed** (long tail to the right). This indicates that **Log Transformation** is required to normalize these distributions.
 * **Overlap:** "Texture" and "Smoothness" show high overlap between classes, suggesting they are less informative on their own compared to "Size" features.
 
-![Distribution Analysis](../results/images/dist_chart.png){#fig-dist_chart}
+<!-- [-- Distribution Analysis](../results/images/dist_chart.png){#fig-dist_chart} -->
 
 ### EDA Findings
 
