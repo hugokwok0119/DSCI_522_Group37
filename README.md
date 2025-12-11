@@ -77,6 +77,8 @@ Ensure [Docker Desktop](https://www.docker.com/products/docker-desktop/) is inst
 
     ```bash
     docker compose up
+    #or
+    make up
     ```
 
 3.  **Access Jupyter Lab:**
