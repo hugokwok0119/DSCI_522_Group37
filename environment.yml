@@ -28,8 +28,8 @@ dependencies:
     - ucimlrepo
     - "deepchecks[tabular]"
     - anywidget
-    - vegafusion=1.4.3
-    - vegafusion-jupyter=1.4.3
-    - vegafusion-python-embed=1.4.3
+    - vegafusion
+    - vegafusion-jupyter
+    - vegafusion-python-embed
 
   
