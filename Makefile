@@ -1,4 +1,10 @@
-.PHONY: all clean
+.PHONY: all clean help setup cl env build run up stop
+
+.DEFAULT_GOAL := help
+
+# ----------------------------------------------------------------------------
+# Analysis Pipeline Targets 
+# ----------------------------------------------------------------------------
 
 all: reports/breast_cancer_predictor_report.pdf reports/breast_cancer_predictor_report.html
 
@@ -47,3 +53,42 @@ clean:
 	rm -f results/images/*.png
 	rm -f reports/breast_cancer_predictor_report.html \
 	      reports/breast_cancer_predictor_report.pdf
+
+# ----------------------------------------------------------------------------
+# Environment & Utilities Targets 
+# ----------------------------------------------------------------------------
+
+help: ## Show this help message
+	@echo "Available commands:"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
+
+setup: ## runs the targets: cl, env, build
+	make cl
+	make env
+	make build
+
+cl: ## create conda lock for multiple platforms
+	conda-lock lock \
+		--file environment.yml \
+		-p linux-64 \
+		-p linux-aarch64 \
+		-p osx-64 \
+		-p osx-arm64 \
+		-p win-64
+
+env: ## remove previous and create environment from lock file
+	conda env remove -n dockerlock || true
+	conda-lock install -n dockerlock conda-lock.yml
+
+build: ## build the docker image from the Dockerfile
+	docker build -t dockerlock --file Dockerfile .
+
+run: ## alias for the up target
+	make up
+
+up: ## stop and start docker-compose services
+	make stop
+	docker-compose up -d
+
+stop: ## stop docker-compose services
+	docker-compose stop
