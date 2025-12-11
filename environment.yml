@@ -1,4 +1,5 @@
 name: MDS_Group37
+
 channels:
   - conda-forge
 
@@ -20,10 +21,8 @@ dependencies:
   - click=8.3.1 # Milestone 3
 
   - pip 
-  # altair_ally
   - pip:
     - altair_ally>=0.1.1
     - ucimlrepo
     - "deepchecks[tabular]"
     - anywidget
-  
