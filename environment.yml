@@ -5,6 +5,7 @@ channels:
 dependencies:
   # core relies
   - python=3.11.6
+  - conda-lock=>3.0.4
   - pandas=2.1.2
   - scikit-learn=1.3.2
   - altair=5.1.2  
