@@ -10,9 +10,6 @@ dependencies:
   - altair=5.1.2  
   
   # plotting relies
-  - vegafusion=1.4.3
-  - vegafusion-jupyter=1.4.3
-  - vegafusion-python-embed=1.4.3
   - vl-convert-python=1.0.1
   
   # jupyter
@@ -31,5 +28,8 @@ dependencies:
     - ucimlrepo
     - "deepchecks[tabular]"
     - anywidget
+    - vegafusion=1.4.3
+    - vegafusion-jupyter=1.4.3
+    - vegafusion-python-embed=1.4.3
 
   
