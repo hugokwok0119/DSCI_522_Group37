@@ -73,7 +73,7 @@ Copy and paste that URL into your browser.
 <img src="img/jupyter-container-web-app-launch-url.png" width=400>
 
 3. To run the analysis now,
-open `src/breast_cancer_predict_report.ipynb` in Jupyter Lab you just launched
+open `notebooks/breast_cancer_predict_report.ipynb` in Jupyter Lab you just launched
 and under the "Kernel" menu click "Restart Kernel and Run All Cells...".
 
 The scripts has a given default arguments for analysis. The simplify version is:
