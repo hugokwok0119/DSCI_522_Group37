@@ -75,7 +75,6 @@ def main(input_file, output_dir):
         # Chart 1: Multicollinearity (Correlation)
         corr_chart = aly.corr(df)
         corr_chart.save(os.path.join(images_dir, 'corr_chart.png'))
-        corr_chart.save(os.path.join(images_dir, 'corr_chart.svg'))
         click.echo(" - Saved Correlation chart")
 
         # Chart 2: Pair Plot (Only Mean columns + Target)
@@ -87,13 +86,11 @@ def main(input_file, output_dir):
         
         pair_chart = aly.pair(df[existing_cols], color='Diagnosis:N')
         pair_chart.save(os.path.join(images_dir, 'pair_chart.png'))
-        pair_chart.save(os.path.join(images_dir, 'pair_chart.svg'))
         click.echo(" - Saved Pair plot")
 
         # Chart 3: Distribution Plot
         dist_chart = aly.dist(df, color='Diagnosis')
         dist_chart.save(os.path.join(images_dir, 'dist_chart.png'))
-        dist_chart.save(os.path.join(images_dir, 'dist_chart.svg'))
         click.echo(" - Saved Distribution chart")
 
         click.echo(click.style(f"EDA Analysis complete. Results saved in '{output_dir}/'", fg='green'))
