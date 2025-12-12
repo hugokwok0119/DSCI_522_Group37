@@ -20,6 +20,11 @@ dependencies:
   - jupyterlab
   - click=8.3.1 # Milestone 3
 
+  # needed for visualization (ally)
+  - vl-convert-python >=1.0.0   
+  - vegafusion-python-embed >=1.4.0 
+  - vegafusion >=1.4.0              
+
   - pip 
   - pip:
     - altair_ally>=0.1.1

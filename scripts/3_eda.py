@@ -1,102 +1,57 @@
-import os
-import io
 import click
 import pandas as pd
-import altair as alt
-import altair_ally as aly
-import warnings  # To suppress any warnings during EDA
+import sys
+import os
 
-alt.data_transformers.enable('vegafusion')
+# Add project root to sys.path to import src
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+if project_root not in sys.path:
+    sys.path.append(project_root)
 
-warnings.filterwarnings('ignore', category=DeprecationWarning) 
-warnings.filterwarnings('ignore', module='altair')
+from src.eda import perform_eda
 
 @click.command()
 @click.option('--input-file', '-i', 
               default='data/processed/breast_cancer_cleaned.csv', 
-              type=click.Path(exists=True),
               help='Path to the cleaned input CSV file.')
 @click.option('--output-dir', '-o', 
               default='results', 
-              type=str,
-              help='Directory where the EDA artifacts (tables and images) will be saved.')
+              help='Directory where the EDA artifacts will be saved.')
 def main(input_file, output_dir):
     """
-    Performs Exploratory Data Analysis (EDA) on the cleaned dataset.
-
-    This script generates summary tables (info, describe) and visualizations
-    (correlation, pair plots, distribution) using Altair and Altair Ally.
-
-    Parameters
-    ----------
-    input_file : str
-        Path to the cleaned data (e.g., data/processed/breast_cancer_cleaned.csv).
-    output_dir : str
-        Directory to save results. Images will be saved in a sub-directory 'images'.
+    Driver script for Exploratory Data Analysis.
     """
+    click.echo(f"Loading data from {input_file}...")
     
-    click.echo(f"Starting EDA on {input_file}...")
-
     try:
-        # 1. Ensure Output Directories Exist
-        images_dir = os.path.join(output_dir, 'images')
-        if not os.path.exists(images_dir):
-            os.makedirs(images_dir)
-            click.echo(f"Created output directories at {output_dir}")
-
-        # 2. Load Data
         df = pd.read_csv(input_file)
-
-        # -------------------------------------------------------
-        # Part A: Textual Summaries (Tables)
-        # -------------------------------------------------------
         
-        # Output 1: DataFrame Info (Data types, non-null counts)
-        # buffer capture is needed because df.info() prints to stdout
-        buffer = io.StringIO()
-        df.info(buf=buffer)
-        info_str = buffer.getvalue()
+        # --- Special Logic for Breast Cancer Dataset ---
+        # Define specific columns for the pair plot to avoid overcrowding
+        # This keeps the 'src' function clean and reusable.
+        target = 'Diagnosis'
+        cols_mean = [c for c in df.columns if '_mean' in c]
         
-        info_path = os.path.join(output_dir, 'eda_info.txt')
-        with open(info_path, 'w', encoding='utf-8') as f:
-            f.write(info_str)
-        click.echo(f"Saved data info to {info_path}")
+        # Ensure target is in the subset for plotting
+        if target in df.columns:
+            pair_plot_subset = cols_mean + [target]
+        else:
+            pair_plot_subset = cols_mean
 
-        # Output 2: Descriptive Statistics (Mean, std, min, max)
-        describe_path = os.path.join(output_dir, 'eda_summary.csv')
-        df.describe(include='all').to_csv(describe_path)
-        click.echo(f"Saved descriptive statistics to {describe_path}")
-
-        # -------------------------------------------------------
-        # Part B: Visualizations (Altair & Altair Ally)
-        # -------------------------------------------------------
-        click.echo("Generating visualizations...")
-
-        # Chart 1: Multicollinearity (Correlation)
-        corr_chart = aly.corr(df)
-        corr_chart.save(os.path.join(images_dir, 'corr_chart.png'))
-        click.echo(" - Saved Correlation chart")
-
-        # Chart 2: Pair Plot (Only Mean columns + Target)
-        # Filter columns as requested
-        cols_mean = [c for c in df.columns if '_mean' in c] + ['Diagnosis']
+        # Call the modular function
+        perform_eda(
+            df=df, 
+            output_dir=output_dir, 
+            target_col=target, 
+            pair_plot_cols=pair_plot_subset
+        )
         
-        # Safety check: ensure columns exist before plotting
-        existing_cols = [c for c in cols_mean if c in df.columns]
-        
-        pair_chart = aly.pair(df[existing_cols], color='Diagnosis:N')
-        pair_chart.save(os.path.join(images_dir, 'pair_chart.png'))
-        click.echo(" - Saved Pair plot")
-
-        # Chart 3: Distribution Plot
-        dist_chart = aly.dist(df, color='Diagnosis')
-        dist_chart.save(os.path.join(images_dir, 'dist_chart.png'))
-        click.echo(" - Saved Distribution chart")
-
-        click.echo(click.style(f"EDA Analysis complete. Results saved in '{output_dir}/'", fg='green'))
+        click.echo(click.style("EDA script completed successfully!", fg='green'))
 
     except Exception as e:
-        click.echo(click.style(f"EDA failed: {e}", fg='red'))
+        click.echo(click.style(f"Error in EDA script: {e}", fg='red'))
+        sys.exit(1)
 
 if __name__ == '__main__':
     main()

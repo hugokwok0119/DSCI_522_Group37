@@ -1,5 +1,5 @@
-.PHONY: all clean help setup cl env build run up stop
-
+.PHONY: all clean help setup cl env build run up stop test
+PYTHON = python
 .DEFAULT_GOAL := help
 
 # ----------------------------------------------------------------------------
@@ -53,6 +53,8 @@ clean:
 	rm -f results/images/*.png
 	rm -f reports/breast_cancer_predictor_report.html \
 	      reports/breast_cancer_predictor_report.pdf
+	rm -rf test/log/
+	find . -type d -name "__pycache__" -exec rm -rf {} +
 
 # ----------------------------------------------------------------------------
 # Environment & Utilities Targets 
@@ -92,3 +94,6 @@ up: ## stop and start docker-compose services
 
 stop: ## stop docker-compose services
 	docker-compose stop
+
+test: ## Run unit tests with logging
+	$(PYTHON) test/run_tests.py
