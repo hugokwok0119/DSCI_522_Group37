@@ -1,7 +1,17 @@
-import os
 import click
-import pandas as pd
-from ucimlrepo import fetch_ucirepo
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+if project_root not in sys.path:
+    sys.path.append(project_root)
+  
+try:
+    from src.download_data import download_data
+except ImportError as e:
+    click.echo(click.style(f"Error importing 'src': {e}", fg='red'))
+    sys.exit(1)
 
 
 @click.command()
@@ -13,52 +23,21 @@ from ucimlrepo import fetch_ucirepo
 def main(dataset_id, output_file):
     """
     Downloads a dataset from the UCI Machine Learning Repository.
-
-    This script fetches the dataset features and targets
-    based on the provided UCI ID, concatenates them into a single DataFrame,
-    and exports the result to the specifiedlocal path.
-
-    Parameters
-    ----------
-    dataset_id : int
-        The unique identifier for the dataset in the UCI repository.
-        Default is 17 (Breast Cancer Wisconsin Diagnostic).
-    output_file : str
-        The full path (including filename)
-        where the CSV file should be written.
-        If the parent directories do not exist, they will be created.
-
-    Returns
-    -------
-    None
-        The function saves a file to disk and prints a confirmation message.
+    
+    This script acts as a CLI wrapper around the 'download_data' function.
     """
-
-    click.echo(f"Downloading dataset with ID: {dataset_id}...")
+    
+    click.echo(f"Starting process for Dataset ID: {dataset_id}...")
 
     try:
-        # Fetch data from UCI repo
-        raw_data = fetch_ucirepo(id=dataset_id)
-  
-        # Extract features and targets
-        raw_X = raw_data.data.features
-        raw_y = raw_data.data.targets
-    
-        # Combine into one DataFrame
-        raw_df = pd.concat([raw_X, raw_y], axis=1)
+        df = download_data(uci_id=dataset_id, output_path=output_file)
         
-        # Create directory if it doesn't exist (Handle Path issues)
-        output_dir = os.path.dirname(output_file)
-        if output_dir and not os.path.exists(output_dir):
-            os.makedirs(output_dir)
-            click.echo(f"Created directory: {output_dir}")
-
-        # Save to CSV
-        raw_df.to_csv(output_file, index=False)
-        click.echo(click.style(f"Successfully saved data to {output_file}", fg='green'))
-
+        if df is not None:
+            click.echo(click.style(f"Process completed! Data shape: {df.shape}", fg='green'))
+        
     except Exception as e:
         click.echo(click.style(f"Error occurred: {e}", fg='red'))
+        sys.exit(1)
 
 
 if __name__ == '__main__':
