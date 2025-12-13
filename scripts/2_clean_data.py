@@ -90,7 +90,7 @@ def clean_and_split_data(df, output_file, output_dir=None):
         test_output_path='data/processed/scaled_test.csv'
     )
     
-    return clean_train_df
+    return clean_train_df, clean_test_df
 
 @click.command()
 @click.option('--input-file', '-i',
