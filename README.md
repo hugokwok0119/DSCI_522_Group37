@@ -27,6 +27,16 @@ The final SVM model achieved strong predictive power on the unseen test set (UCI
 * **Test Set Performance**: Correctly predicted **109 out of 114** cases.
 * **Critical Evaluation**: The model produced **1 False Negative** (predicting benign when actual was malignant). While statistically excellent, we discuss the clinical risks of this single error in our full report and suggest future cost-sensitive training methods to mitigate this risk.
 
+## Importance
+
+These results demonstrate that a carefully tuned SVM model can effectively distinguish between benign and malignant tumors using non-invasive image-derived features. The high predictive performance suggests potential utility as a decision-support or preliminary screening tool, where automated assessments could assist clinicians by prioritizing high-risk cases for further evaluation.
+
+## Limitations
+
+Despite strong performance, several limitations must be acknowledged. The dataset is relatively small and derived from a single source, which may limit generalizability to broader patient populations. Additionally, the model was optimized for overall accuracy rather than explicitly minimizing false negatives, an important consideration in clinical deployment. The presence of even a single false negative underscores the need for cost-sensitive learning approaches and further validation on external datasets.
+
+Future work should focus on incorporating clinically weighted loss functions, expanding evaluation across diverse cohorts, and analyzing misclassified cases to improve model robustness and safety for real-world clinical use.
+
 ## Report
 
 The full analysis, including code and visualizations, can be viewed here:
