@@ -40,7 +40,7 @@ jobs:
 
       - name: Run conda-lock
         shell: "bash -l {0}"
-        run: conda-lock lock --file environment.yml -p linux-64 -p osx-64 -p osx-arm64 -p win-64 -p linux-aarch64
+        run: conda-lock lock --file environment.yml -p linux-64 -p osx-64 -p osx-arm64 -p win-64
 
       # checks if the conda-lock.yml file has any changes
       - name: Check for changes
