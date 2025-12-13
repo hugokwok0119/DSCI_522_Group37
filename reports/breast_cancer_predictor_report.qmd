@@ -1,130 +1,120 @@
 ---
-title: 'Exploratory Data Analysis: Wisconsin Diagnostic Breast Cancer (WDBC)'
-author: 'Hoi Hin Kwok, Sameel Syed, Lavanya Gupta & Yusheng Li'
-jupyter:
-  kernelspec:
-    display_name: Python [conda env:MDS_Group37]
-    language: python
-    name: dockerlock
+title: "Predicting Malignancy in Breast Tumours Using Machine Learning"
+author: "Hoi Hin Kwok, Sameel Syed, Lavanya Gupta & Yusheng Li"
+date: "December 12, 2025"
 format:
+  html:
+    toc: true
+    toc-depth: 4
+    embed-resources: true
+  pdf:
+    toc: true
+    toc-depth: 4
   typst:
-    toc: true          #enabling table of contents
-    toc-depth: 3       #including the headings
+    toc: true          
+    toc-depth: 4       
+editor: source
 bibliography: references.bib
 execute:
-    echo: false
+  echo: false
+  warning: false
 ---
 
 
-### 1.1 Introduction
-This report analyzes the Wisconsin Diagnostic Breast Cancer (WDBC) dataset to identify key features distinguishing malignant from benign tumors. The data features were computed from digitized images of fine needle aspirates (FNA) of breast masses, describing the characteristics of the cell nuclei present in the image [@wolberg2003elevated] .
+# Summary
 
-### 1.2 Data Acquisition
-The raw data was retrieved directly from the UCI Machine Learning Repository to ensure reproducibility. The dataset consists of 569 instances with 30 real-valued input features and one binary target variable (`Diagnosis`).
+This project develops a Support Vector Machine (SVM) classification model to predict whether breast tumours are benign or malignant using digitized image measurements. 
+Our final classifier achieved high performance on the test set with 104 correctly classified cases out of 109 samples. 
+However, the model produced one false negative—misclassifying a malignant tumour as benign—which represents a significant 
+clinical concern. While the overall accuracy is promising, further model refinement is necessary before clinical deployment 
+to minimize false negatives, which could delay critical treatment interventions.
 
-### 2. Data Cleaning, Schema Mapping, and Data Validation
-The raw dataset lacks semantic column headers. To facilitate analysis, we implemented a schema mapping strategy based on the `wdbc.names` metadata. The 30 features represent ten distinct cell nucleus characteristics (e.g., Radius, Texture) computed in three statistical forms.
+# Introduction
 
-We applied the following suffix mapping transformation:
-* **Mean Value:** Suffix `1` -> `_mean`
-* **Standard Error:** Suffix `2` -> `_se`
-* **Worst (Max) Value:** Suffix `3` -> `_max`
+Breast cancer remains one of the most prevalent cancers among women, with early detection shown to dramatically improve outcomes [@canadian2019cancer]. 
+Patients diagnosed at early stages have a 5-year survival rate of 99%, compared to only 31% for late-stage diagnoses [@street1993nuclear]. 
+Traditional tumour diagnosis methods can be subjective and depend heavily on physician experience. 
 
-This step ensures all features are semantically interpretable for the subsequent EDA.
+An accurate machine learning classifier could provide several benefits:
 
-To ensure the dataset is clean, consistent, and ready for modeling, we validated the data by implementing the following checks:
+- **Objectivity:** Reducing subjectivity in diagnosis by providing consistent, data-driven predictions
+- **Scalability:** Enabling more efficient screening programs in resource-limited settings
+- **Early intervention:** Supporting faster diagnostic pathways to improve patient outcomes
+- **Clinical decision support:** Assisting physicians by flagging high-risk cases for additional review
 
-- Correct Data File Format
-The cleaned dataset was exported as a standard CSV (breast_cancer_cleaned.csv) with UTF-8 encoding. It successfully loaded in pandas without errors, confirming proper file format and readability.
+Since benign tumours remain localized and stop growing, while malignant tumours invade surrounding tissues and metastasize, 
+accurate classification is critical for determining appropriate treatment pathways. Thus, if a machine learning algorithm 
+can succesfully classify tumours we can expect substantially improved patient outcomes.
 
-- Correct Column Names
-All 30 feature columns follow the expected naming convention (<feature>_mean, <feature>_se, <feature>_max). The Diagnosis column contains only "Benign" and "Malignant" values, and the total number of columns is 31, as expected.
+## Research Question
 
-- No Empty Observations
-All rows contain complete observations. There are no fully empty rows, and no partial missing values were detected.
+Can we build a machine learning model to accurately predict whether a newly discovered breast tumour is benign or 
+malignant based on digitized image measurements of tumour cell nuclei?
 
-- Missingness Within Expected Threshold
-A threshold of 5% missingness per column was applied. No columns exceeded this limit, ensuring all features are sufficiently complete for reliable modeling.
+# Methods
 
-By combining schema mapping with these validation checks, the dataset is fully consistent, correctly formatted, and reproducible, providing a robust foundation for downstream modeling and analysis.
+All data manipulation and analysis was performed using Python [@python] and the following packages: pandas [@mckinney2010data] for data manipulation, NumPy [@harris2020array] for numerical computing, scikit-learn [@pedregosa2011scikit] for machine learning algorithms, and Altair [@vanderplas2018altair] for visualization. The computational environment was containerized using Docker [@docker].
 
-![No outlier or anomalous values](../results/static/feature_distributions.png){#fig-feature_distibution}
+## Data
 
-### Outlier Analysis & Scaling Strategy
+The Wisconsin Diagnostic Breast Cancer (WDBC) dataset was retrieved from the UCI Machine Learning  Repository  [@dua2019uci]. Created by Dr. William H. Wolberg, W. Nick Street, and Olvi L. Mangasarian at the University of Wisconsin-Madison, the dataset contains measurements computed from digitized images of fine needle aspirate (FNA) samples of breast masses.
 
-Due to the massive disparity in magnitude between features (e.g., `Area` > 2000 vs. `Smoothness` < 0.2), a **Symmetric Log (Symlog) scale** was applied to the visualizations. This effectively mitigates the compressing effect of the `Area` feature, allowing the distribution and spread of smaller-scale variables to be clearly observed without losing the information from larger values.
+The dataset consists of:
 
-Post-scaling inspection reveals numerous outliers (points beyond whiskers), particularly in Malignant samples (Orange).
-* **Significance:** These are **not data errors**. In the context of breast cancer, extreme values in features like `Area`, `Concavity`, and `Perimeter` are characteristic of malignant tumor growth.
-* **Conclusion:** These points represent high-priority **biological signals** essential for classification.
+- 569 instances (357 benign, 212 malignant)
+- 30 real-valued features representing measurements of cell nuclei characteristics
+- 1 binary target variable (Diagnosis: Benign or Malignant)
 
-**Preprocessing Recommendation**
-* **Action:** **Do not drop** these outliers, as removing them would discard critical diagnostic information.
-* **Strategy:** To handle the skewness and scale differences during modeling:
-    1.  Apply **Log Transformation** (`np.log1p`) to right-skewed features (Area, Perimeter) to normalize distributions.
-    2.  Apply **Standard Scaling** (`StandardScaler`) to all features to ensure the model treats all dimensions with equal weight.
+Each feature represents one of ten cell nucleus characteristics (radius, texture, perimeter, area, smoothness, compactness, concavity, concave points, symmetry, and fractal dimension) computed in three forms:
 
-9. Target/response variable follows expected distribution
-* We validate that the target variable `Diagnosis` is not severely imbalanced. If one class is much rarer than the other, this can hurt model performance and may require special handling (for example, resampling or adjusting evaluation metrics).
-
-![Target/response variable follows expected distribution](../results/static/class_imbalance.png){#fig-class_imblance}
-
-1.  No anomalous correlations between target and features
-* We check how strongly each feature is associated with `Diagnosis`. Extremely high predictive power for a single feature can indicate data leakage or unexpected dependencies that should be investigated.
-
-![No anomalous correlations between target and features](../results/static/feature_label_corr.png){#fig-feature_label_corr}
-
-1.  No anomalous correlations between features
-* We examine pairwise correlations between features. If many feature pairs are highly correlated, this suggests redundancy or multicollinearity, which may require feature selection or dimensionality reduction.
-
-![No anomalous correlations between features](../results/static/feature_feature_corr.png){#fig-feature_feature_corr}
-
-The `FeatureFeatureCorrelation` check fails the condition we set. In our data there are many feature pairs with very high correlation, for example `radius_mean`, `perimeter_mean` and `area_mean`, as well as their corresponding `_max` and `_se` versions. This pattern is expected for this dataset because these variables all describe related geometric properties of the tumor, so strong correlations are not a data quality error but a sign of redundancy and multicollinearity.
-
-### 3. Data Profiling: Structure and Statistics
-**Purpose:**
-* **`df.info()`:** Used to verify data integrity by checking for null values and ensuring all feature columns are of `float64` type.
-* **`df.describe()`:** Used to examine the central tendency and spread of numeric features. This highlights differences in **magnitude** (scales) across variables.
-
-**Observation:**
-The dataset is complete (no missing values). However, `describe()` reveals massive scale disparities (e.g., `area_mean` ranges up to 2500, while `smoothness_mean` is < 0.1), confirming the necessity for **Feature Scaling** (Standardization) before modeling.
-
-### 4. Correlation Analysis: Pearson vs. Spearman
-**Method:**
-* **Pearson Correlation:** Measures linear relationships.
-* **Spearman Correlation:** Measures monotonic rank relationships (non-linear).
-Comparing both helps identify if relationships are strictly linear or just trending in the same direction.
+- Mean value across cells
+- Standard error (SE) of the values
+- Maximum ("worst") value observed
 
 
-**Purpose:**
-To detect **Multicollinearity**—redundant features that increase model complexity without adding information.
+### Feature Analysis
 
-**Results:**
-Both metrics show near-perfect correlation ($>0.95$) between `Radius`, `Perimeter`, and `Area`. This confirms these features are geometrically redundant. We should retain only one (e.g., Radius) and drop the others to improve model stability.
+#### Distribution Analysis
 
-![Multicollinearity](../results/images/corr_chart.png){#fig-corr_chart}
+Figure 1 shows the distribution of all 30 features colored by diagnosis class. Key observations include:
 
-### 5. Pairwise Separability Analysis
-**Purpose:**
-To visualize 2D decision boundaries. We look for feature combinations where the **Benign (Blue)** and **Malignant (Orange)** clusters are clearly distinct with minimal overlap.
-
-**Results:**
-* **High Separability:** Features related to size (`radius_mean`) and shape complexity (`concavity_mean`) separate the classes well.
-* **Non-linear patterns:** The curved relationship between `area` and `radius` is clearly visible, reinforcing the geometric redundancy found in the correlation analysis.
-
-![Pairwise Separability](../results/images/pair_chart.png){#fig-pair_chart}
-
-### 6. Distribution Analysis
-**Purpose:**
-To inspect the univariate "shape" of the data. We look for **Skewness** (asymmetry) and **Outliers** that could bias linear models.
-
-**Results:**
-* **Skewness:** Features like `area_se` and `concavity_mean` are heavily **right-skewed** (long tail to the right). This indicates that **Log Transformation** is required to normalize these distributions.
-* **Overlap:** "Texture" and "Smoothness" show high overlap between classes, suggesting they are less informative on their own compared to "Size" features.
+- **Size-related features** (`radius_mean`, `perimeter_mean`, `area_mean`) show clear separation between benign (blue) and malignant (orange) tumours, with malignant tumours exhibiting consistently larger values
+- **Shape complexity features** (`concavity_mean`, `concave_points_mean`) demonstrate strong discriminative power, with malignant tumours showing higher irregularity
+- **Texture and smoothness features** display substantial overlap between classes, suggesting lower individual predictive value
+- **Right skewness** is evident in area and concavity features, particularly in their standard error (`_se`) variants
 
 ![Distribution Analysis](../results/images/dist_chart.png){#fig-dist_chart}
 
-### EDA Findings
+#### Outlier Analysis
+
+Numerous outliers were observed, particularly in malignant samples for size-related features as shown in Figure 2. 
+These extreme values are not data errors but represent biologically meaningful signals characteristic of aggressive tumour growth. 
+Therefore, these outliers were retained in the analysis as they contain critical diagnostic information.
+
+![Looking at Outliers](../results/static/feature_distributions.png){#fig-feature_distributions}
+
+#### Correlation Analysis  
+
+Figure 3 presents Pearson and Spearman correlation matrices revealing severe multicollinearity. Key findings:
+
+- Near-perfect correlation (r > 0.95) between `radius`, `perimeter`, and `area` across all three statistical forms (_mean, _se, _max)
+- Strong positive correlations (r > 0.85) among `concavity`, `concave_points`, and `compactness`
+- Similar correlation patterns observed in both Pearson (linear) and Spearman (monotonic) metrics.
+
+This multicollinearity is geometrically expected but creates redundancy that can destabilize models and inflate variance.
+
+![Multicollinearity](../results/images/corr_chart.png){#fig-corr_chart}
+
+#### Pairwise Separability
+
+The pairplot (Figure 4) visualizes 2D relationships between selected features. Size-related features (`radius_mean`, `area_mean`) combined with 
+shape complexity metrics (`concavity_mean`, `concave_points_mean`) demonstrate clear class separation with minimal overlap. 
+The curved relationship between `area` and `radius` reinforces the geometric redundancy identified in correlation analysis.
+
+![Pairwise Separability](../results/images/pair_chart.png){#fig-pair_chart}
+
+
+#### Initial Findings
 
 * **Class Separation:**
     * **High Separability:** Features related to **size** (`radius`, `perimeter`, `area`) and **concavity** (`concave_points`, `concavity`) show clear distinction between Benign and Malignant classes (Malignant samples generally have higher values).
@@ -133,34 +123,100 @@ To inspect the univariate "shape" of the data. We look for **Skewness** (asymmet
     * **Skewness:** "Area" and "Concavity" features (both `_mean` and `_se`) are heavily **right-skewed**.
     * **Outliers:** Visible in the upper tails of `area_max` and `perimeter_se`.
 * **Correlations (Multicollinearity):**
-    * **Severe Multicollinearity:** `radius`, `perimeter`, and `area` are perfectly correlated ($R \approx 1$). This is expected geometrically but redundant for models.
+    * **Severe Multicollinearity:** `radius`, `perimeter`, and `area` are highly correlated. This is expected geometrically but redundant for models.
     * `concavity`, `concave_points`, and `compactness` also exhibit very high positive correlation.
 
-### Preprocessing Recommendations
+### Preprocessing Pipeline
 
-Based on the above, the following pipeline is suggesued:
+Based on our primary exploration of the data, the following was implemented within our model:
 
-1.  **Feature Selection / Drop:**
-    * Remove redundant features to reduce multicollinearity. **Keep `radius`** (or `perimeter`), but **drop `area`** and `perimeter` as they duplicate information.
-2.  **Transformation:**
-    * Apply **Log Transformation** to skewed features (e.g., `area`, `concavity`) to normalize distributions.
-3.  **Scaling:**
-    * Features vary vastly in scale (e.g., `area` > 1000 vs. `smoothness` < 0.2). Use **`StandardScaler`** to standardize all features to unit variance.
-4.  **Imputation:**
-    * None needed (Data is clean).
+1.  **Feature Selection:**
+    * We removed redundant features to reduce multicollinearity.
+2.  **Scaling:**
+    * Since our features vary vastly in scale (e.g., `area` > 1000 vs. `smoothness` < 0.2). We used **`StandardScaler`** to standardize all features to unit variance.
 
-### Onto Creating a Classification Model
+### Model Development
+
+A Support Vector Machine (SVM) classifier with radial basis function (RBF) kernel was selected. SVM was chosen because:
+
+- It performs well on high-dimensional data
+- It is effective with clear class separation as observed in our intial feature analysis
+
+#### Hyperparameter Tuning
+
+Grid search with 15-fold cross-validation was performed to optimize:
+
+- `C` (regularization parameter): [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]
+- `gamma` (kernel coefficient): [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]
+
+Figure 5 shows the heatmap of mean test scores across the hyperparameter grid. The optimal hyperparameters were:
+
+- `C = 10.0`
+- `gamma = 0.001`
 
 ![Heatmap for SVM GridSearchCV Mean Test Score](../results/images/svm_heatmap.png){#fig-svm_heatmap}
 
+These values provided the best balance between model complexity and generalization performance, 
+achieving the highest mean cross-validation score.
+
+# Results & Discussion
+
+## Model Performance
+
+The final SVM classifier demonstrated strong performance on the test set. Figure 1 presents the confusion matrix, showing:
+
+- **True Negatives (Benign correctly classified):** 68 cases
+- **False Positives (Benign misclassified as Malignant):** 4 cases  
+- **False Negatives (Malignant misclassified as Benign):** 1 case
+- **True Positives (Malignant correctly classified):** 41 cases
+
 ![Heatmap for Confusion Matrix](../results/images/con_mat_heatmap.png){#fig-con_mat_heatmap}
 
-### Discussion:
-Our model demonstrated strong performance, achieving high accuracy on the test set derived from the UCI Machine Learning Repository [@frank2010uci] and correctly classifying nearly all cases. This result was generally expected given the strong feature patterns observed during Exploratory Data Analysis (EDA), which suggested a clear separation between benign and malignant tumours.
+Overall test accuracy: 95.61% (109 correct predictions out of 114 test samples)
 
-However, the main concern is the occurrence of a single false negative, where a malignant tumour was incorrectly predicted as benign. Although rare, such an error carries significant clinical risk. Accurate classification is critical for determining appropriate treatment pathways [@board2025breast], and missed diagnoses can severely impact patient outcomes given the prevalence and nature of the disease [@american2007breast]. This highlights that the model, while statistically strong, requires further refinement before it is reliable enough for real-world medical deployment.
+The model's strong performance aligns with expectations based on the clear feature patterns observed during
+our initial feature analysis. Size and shape complexity features provided strong discriminative signals, enabling accurate 
+classification in most cases.
 
-These results suggest that future work should explore methods aimed at reducing false negatives, such as adjusting class weights, employing cost-sensitive training, or validating on external datasets to assess robustness.
+However, the presence of **one false negative** represents the primary concern. In a clinical context, false negatives are 
+significantly more harmful than false positives. A false negative could lead to:
 
-### References
+- Delayed diagnosis and treatment initiation
+- Disease progression to more advanced, less treatable stages  
+- Reduced survival probability
+
+Moreover, while the four false positives (benign tumours classified as malignant) are less critical as they are likely to lead to follow-up testing 
+rather than immediate treatment, they still represent unnecessary patient anxiety and healthcare costs.
+
+## Clinical Implications
+
+The model's 96% accuracy is promising but insufficient for clinical deployment as a standalone diagnostic tool. 
+Medical applications require extremely high sensitivity for malignant cases to minimize false negatives. T
+he single false negative in this small test set suggests the model may produce several missed diagnoses across larger patient populations.
+
+## Limitations
+
+Several limitations affect the interpretation of these results:
+
+- **Small test set:** With only 114 test samples, performance estimates have wide confidence intervals
+- **Single dataset source:** Model generalizability to other populations or imaging equipment is unknown  
+- **Feature engineering:** Limited exploration of feature interactions or polynomial features
+
+## Future Work
+
+To improve model reliability for clinical use, we recommend:
+
+1. **Class weight adjustment:** Increase the penalty for false negatives during training to prioritize recall over precision
+2. **Ensemble methods:** Combine multiple classifiers to improve robustness
+3. **External validation:** Test on independent datasets from different medical centers to assess generalizability  
+4. **Feature engineering:** Explore interaction terms and domain-specific features to capture complex patterns
+5. **Error analysis:** Conduct detailed investigation of misclassified cases to identify systematic patterns
+
+
+
+# References
+
+::: {#refs}
+:::
+
 
