@@ -19,6 +19,8 @@ from sklearn.compose import make_column_transformer
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report, confusion_matrix
 import altair as alt
+from src.modeling import create_svm_model
+
 
 alt.data_transformers.enable('vegafusion')
 
@@ -69,7 +71,7 @@ def main(train_file, test_file, output_dir):
 
     click.echo(f"Data shape: X_train={X_train.shape}, X_test={X_test.shape}")
 
-    svc = SVC(kernel='rbf')
+    svc = create_svm_model(kernel="rbf")
 
     param_grid = {
         "gamma": [0.001, 0.01, 0.1, 1.0, 10, 100],
