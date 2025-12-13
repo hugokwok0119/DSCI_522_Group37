@@ -5,6 +5,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.compose import make_column_transformer, make_column_selector
 from sklearn.preprocessing import StandardScaler
 import pickle
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+if project_root not in sys.path:
+    sys.path.append(project_root)
+
+from src.preprocessing import preprocess_data
 
 @click.command()
 @click.option('--input-file', '-i',
@@ -84,6 +92,8 @@ def main(input_file, output_file):
         clean_test_df.to_csv('data/processed/clean_test.csv', index=False)
         
         click.echo(click.style(f"Successfully saved split processed data", fg='green'))
+
+        #Preprocessing related works begins here
         
         numeric_feats = [
             'radius_mean', 'texture_mean', 'smoothness_mean', 'compactness_mean',
@@ -101,32 +111,19 @@ def main(input_file, output_file):
             'perimeter_max', 'area_max'
         ]
 
-        ct = make_column_transformer(
-            (StandardScaler(), numeric_feats),
-            ("drop", drop_feats),
-            remainder="passthrough" 
+        #Using function from preprocessing.py to preprocess
+        result = preprocess_data(
+            train_df=clean_train_df,
+            test_df=clean_test_df,
+            numeric_features=numeric_feats,
+            drop_features=drop_feats,
+            output_pickle_path="results/models/preprocessor.pickle",
+            save_transformed_csv=True,
+            train_output_path='data/processed/scaled_train.csv',
+            test_output_path='data/processed/scaled_test.csv'
         )
         
-        os.makedirs("results/models", exist_ok=True)
-        pickle.dump(ct, open("results/models/ct.pickle", "wb"))
-
-        ct.fit(clean_train_df)
-        scaled_clean_test = ct.transform(clean_test_df)
-        scaled_clean_train = ct.transform(clean_train_df)
-        
-        new_columns = ct.get_feature_names_out()
-        
-        scaled_test_df = pd.DataFrame(scaled_clean_test, columns=new_columns)
-        scaled_train_df = pd.DataFrame(scaled_clean_train, columns=new_columns)
-        
-        scaled_test_df.to_csv('data/processed/scaled_clean_test.csv', index=False)
-        scaled_train_df.to_csv('data/processed/scaled_clean_train.csv', index=False)
-        
-        click.echo(click.style(f"Successfully saved scaled data", fg='green'))
-        
-        
-
-        
+        click.echo(click.style(f"Successfully saved scaled data and preprocessor", fg='green'))
 
     except Exception as e:
         click.echo(click.style(f"Processing failed: {e}", fg='red'))

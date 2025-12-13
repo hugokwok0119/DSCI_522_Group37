@@ -16,7 +16,6 @@ We developed a binary classification model using the **Support Vector Machine (S
 
 Our exploratory data analysis (EDA) revealed critical patterns that directly informed our modeling strategy:
 
-* **Handling Skewed Data**: We observed that features like `Area` and `Perimeter` spanned vast magnitudes (values > 2000) compared to features like `Smoothness` (< 0.1). We applied **Symmetric Log (Symlog) transformation** to visualize these distributions effectively without losing information from extreme values.
 * **Outliers as Signals**: Statistical outliers were detected, particularly in malignant samples. Domain investigation confirmed these were not data errors but characteristic biological signals of tumor growth; thus, they were retained to preserve diagnostic information.
 * **Multicollinearity Strategy**: We identified near-perfect correlation between `Radius`, `Perimeter`, and `Area`. To improve model stability, we identified these as geometrically redundant and prioritized feature selection.
 
@@ -24,8 +23,8 @@ Our exploratory data analysis (EDA) revealed critical patterns that directly inf
 
 The final SVM model achieved strong predictive power on the unseen test set (UCI Machine Learning Repository).
 
-* **Overall Accuracy**: 99%
-* **Test Set Performance**: Correctly predicted **113 out of 114** cases.
+* **Overall Accuracy**: 95.6%
+* **Test Set Performance**: Correctly predicted **109 out of 114** cases.
 * **Critical Evaluation**: The model produced **1 False Negative** (predicting benign when actual was malignant). While statistically excellent, we discuss the clinical risks of this single error in our full report and suggest future cost-sensitive training methods to mitigate this risk.
 
 ## Report
@@ -56,7 +55,7 @@ root/
 ├── Makefile                # Automation commands
 ├── environment.yml         # Local dependency lock
 └── README.md
-
+```
 ## Usage
 
 To ensure reproducibility, we support two execution methods.
