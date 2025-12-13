@@ -6,6 +6,8 @@ A reproducible data analysis project investigating breast cancer tumor classific
 
 ## Project Overview
 
+Breast cancer classification has been extensively studied in the machine learning literature; however, reproducibility, transparent feature selection, and clinically motivated error analysis remain ongoing challenges. The Breast Cancer Wisconsin (Diagnostic) dataset was selected due to its widespread use as a benchmark dataset, physician-verified labels, and interpretable feature set derived from real diagnostic imaging. Using this dataset allows our work to be directly comparable to prior studies while focusing on building a fully reproducible, well-documented pipeline that emphasizes clinically relevant evaluation and error analysis.
+
 ### The Challenge
 Breast cancer diagnosis often relies on the visual interpretation of fine needle aspirate (FNA) images. The core challenge is to accurately distinguish between **benign** (non-harmful) and **malignant** (harmful) tumors based on geometric measurements of cell nuclei. In this medical context, minimizing false negatives is critical, as missing a malignant case can delay necessary life-saving treatment.
 
