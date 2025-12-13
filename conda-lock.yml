@@ -13,11 +13,11 @@
 version: 1
 metadata:
   content_hash:
-    linux-64: 402401938788f8938dad4fb464bf6369ad1732ad6e7302d712060dcc9266c597
+    linux-64: baf858fbc05cf9bfaf0c5b08c0638a9977986ea3b4d278b216738d0686b08ed1
     linux-aarch64: 05f72517f52904df62d13d7c68bd04276a7d47e0885f5e950ff1ff949cff0b60
-    osx-64: 7eba43405fd46f25721fe6ce4146d0ac60a5e72c8f82813e77d720f6441a2c48
-    osx-arm64: 50d64418936c06af1fd026ab20e16fc35bdb87cdad72377072057c044e56f2ce
-    win-64: c18a9ad2cfd87b3dc734c419956ee9efb2475fb7af71a45cd8bbdf947abbb42e
+    osx-64: 1a476739b0455315e880245b6a048e713476cb63895cf9417237b971ea500b3a
+    osx-arm64: cbefda997c4e92e4345f4c878170feecd30d9a8c7c8423d2fc83d63c5fad0c50
+    win-64: 0bb38037cecd55c4a9d711a73d86e418d8da5ab0313969608bb61c61d20a59ac
   channels:
   - url: conda-forge
     used_env_vars: []
@@ -560,6 +560,69 @@ package:
   hash:
     md5: 5fde0926a521a37d454a5e3162cb6e51
     sha256: 787e9a5f0a5624fee2af4f58c823bd7933b8ca560e794dd9a821e990b31d2d49
+  category: main
+  optional: false
+- name: arro3-core
+  version: 0.6.5
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    libgcc: '>=14'
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+    typing_extensions: '>=4.6.0'
+  url: https://conda.anaconda.org/conda-forge/linux-64/arro3-core-0.6.5-py311hc8fb587_0.conda
+  hash:
+    md5: a5e5c5ab2f89ce9210b89c47808289d1
+    sha256: 7332cfc29c3bd1ae9d7682f51743e1cc390bcfeb5f74d69a67e567d3c4d3d9e6
+  category: main
+  optional: false
+- name: arro3-core
+  version: 0.6.5
+  manager: conda
+  platform: osx-64
+  dependencies:
+    __osx: '>=10.13'
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+    typing_extensions: '>=4.6.0'
+  url: https://conda.anaconda.org/conda-forge/osx-64/arro3-core-0.6.5-py311hef35832_0.conda
+  hash:
+    md5: 99d5d3272b77387bd983a7224236d53d
+    sha256: 3661c5f0bb94bd4ad11272f781998aa744045ec8446e36786a6450de6cf0de19
+  category: main
+  optional: false
+- name: arro3-core
+  version: 0.6.5
+  manager: conda
+  platform: osx-arm64
+  dependencies:
+    __osx: '>=11.0'
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+    typing_extensions: '>=4.6.0'
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/arro3-core-0.6.5-py311h0f0954d_0.conda
+  hash:
+    md5: bb44fbdefee504537f3add7c6561c95a
+    sha256: 1ee17879bc38b53d7f5ca0fc75a2ca1257562d1407b01cd131eabf26618c4902
+  category: main
+  optional: false
+- name: arro3-core
+  version: 0.6.5
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+    typing_extensions: '>=4.6.0'
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://conda.anaconda.org/conda-forge/win-64/arro3-core-0.6.5-py311h18438d6_0.conda
+  hash:
+    md5: 7cc013dd91dce0e67580277746d73641
+    sha256: 32b8b7d12193f745396760bc9759ce1c9071110f26e3c2ff83c88a1e74241407
   category: main
   optional: false
 - name: arrow
@@ -8838,6 +8901,54 @@ package:
     sha256: 9883b64dea87c50e98fabc05719ff0fdc347f57d7bacda19bcd69b80d8c436d4
   category: main
   optional: false
+- name: narwhals
+  version: 2.13.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/narwhals-2.13.0-pyhcf101f3_0.conda
+  hash:
+    md5: 0129bb97a81c2ca0f57031673424387a
+    sha256: 03220ba0560de1d81b8b122e8ff6313238dbb1ed621db39f4b81f767904ed475
+  category: main
+  optional: false
+- name: narwhals
+  version: 2.13.0
+  manager: conda
+  platform: osx-64
+  dependencies:
+    python: '>=3.10'
+  url: https://conda.anaconda.org/conda-forge/noarch/narwhals-2.13.0-pyhcf101f3_0.conda
+  hash:
+    md5: 0129bb97a81c2ca0f57031673424387a
+    sha256: 03220ba0560de1d81b8b122e8ff6313238dbb1ed621db39f4b81f767904ed475
+  category: main
+  optional: false
+- name: narwhals
+  version: 2.13.0
+  manager: conda
+  platform: osx-arm64
+  dependencies:
+    python: '>=3.10'
+  url: https://conda.anaconda.org/conda-forge/noarch/narwhals-2.13.0-pyhcf101f3_0.conda
+  hash:
+    md5: 0129bb97a81c2ca0f57031673424387a
+    sha256: 03220ba0560de1d81b8b122e8ff6313238dbb1ed621db39f4b81f767904ed475
+  category: main
+  optional: false
+- name: narwhals
+  version: 2.13.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: '>=3.10'
+  url: https://conda.anaconda.org/conda-forge/noarch/narwhals-2.13.0-pyhcf101f3_0.conda
+  hash:
+    md5: 0129bb97a81c2ca0f57031673424387a
+    sha256: 03220ba0560de1d81b8b122e8ff6313238dbb1ed621db39f4b81f767904ed475
+  category: main
+  optional: false
 - name: nbclassic
   version: 1.3.3
   manager: conda
@@ -14699,10 +14810,10 @@ package:
   manager: conda
   platform: linux-64
   dependencies: {}
-  url: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025b-h78e105d_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025b-h8577fbf_1.conda
   hash:
-    md5: 4222072737ccff51314b5ece9c7d6f5a
-    sha256: 5aaa366385d716557e365f0a4e9c3fca43ba196872abbbe3d56bb610d131e192
+    md5: e4e8496b68cf5f25e76fbe67f3856550
+    sha256: 865716d3e2ccaca1218462645830d2370ab075a9a118c238728e1231a234bc6c
   category: main
   optional: false
 - name: tzdata
@@ -14721,10 +14832,10 @@ package:
   manager: conda
   platform: osx-64
   dependencies: {}
-  url: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025b-h78e105d_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025b-h8577fbf_1.conda
   hash:
-    md5: 4222072737ccff51314b5ece9c7d6f5a
-    sha256: 5aaa366385d716557e365f0a4e9c3fca43ba196872abbbe3d56bb610d131e192
+    md5: e4e8496b68cf5f25e76fbe67f3856550
+    sha256: 865716d3e2ccaca1218462645830d2370ab075a9a118c238728e1231a234bc6c
   category: main
   optional: false
 - name: tzdata
@@ -14732,10 +14843,10 @@ package:
   manager: conda
   platform: osx-arm64
   dependencies: {}
-  url: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025b-h78e105d_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025b-h8577fbf_1.conda
   hash:
-    md5: 4222072737ccff51314b5ece9c7d6f5a
-    sha256: 5aaa366385d716557e365f0a4e9c3fca43ba196872abbbe3d56bb610d131e192
+    md5: e4e8496b68cf5f25e76fbe67f3856550
+    sha256: 865716d3e2ccaca1218462645830d2370ab075a9a118c238728e1231a234bc6c
   category: main
   optional: false
 - name: tzdata
@@ -14743,10 +14854,10 @@ package:
   manager: conda
   platform: win-64
   dependencies: {}
-  url: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025b-h78e105d_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025b-h8577fbf_1.conda
   hash:
-    md5: 4222072737ccff51314b5ece9c7d6f5a
-    sha256: 5aaa366385d716557e365f0a4e9c3fca43ba196872abbbe3d56bb610d131e192
+    md5: e4e8496b68cf5f25e76fbe67f3856550
+    sha256: 865716d3e2ccaca1218462645830d2370ab075a9a118c238728e1231a234bc6c
   category: main
   optional: false
 - name: ucrt
@@ -14937,6 +15048,136 @@ package:
     sha256: f79edd878094e86af2b2bc1455b0a81e02839a784fb093d5996ad4cf7b810101
   category: main
   optional: false
+- name: vegafusion
+  version: 2.0.3
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    arro3-core: '>=0.4.2'
+    libgcc: '>=14'
+    narwhals: '>=1.42'
+    packaging: ''
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+  url: https://conda.anaconda.org/conda-forge/linux-64/vegafusion-2.0.3-py311h5fab662_0.conda
+  hash:
+    md5: 35e4719ca016b7e9284cf0994cea774d
+    sha256: cd83e873c9ef8a8c2841f90f5f1b98a8575836b297fcc32e8d38cdc321c0c19c
+  category: main
+  optional: false
+- name: vegafusion
+  version: 2.0.2
+  manager: conda
+  platform: osx-64
+  dependencies:
+    __osx: '>=10.13'
+    arro3-core: '>=0.4.2'
+    narwhals: '>=1.13.5'
+    packaging: ''
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+  url: https://conda.anaconda.org/conda-forge/osx-64/vegafusion-2.0.2-py311hbcfc4b0_1.conda
+  hash:
+    md5: f05deeab0c659bb6c178acbffd5b5cb0
+    sha256: 14cafbe265a29201fb42909129d3d9a58889605abd226be3ebafb029cfc589f6
+  category: main
+  optional: false
+- name: vegafusion
+  version: 2.0.2
+  manager: conda
+  platform: osx-arm64
+  dependencies:
+    __osx: '>=11.0'
+    arro3-core: '>=0.4.2'
+    narwhals: '>=1.13.5'
+    packaging: ''
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/vegafusion-2.0.2-py311hce63ec1_1.conda
+  hash:
+    md5: 86d809bb98e397cca8db45ef237de017
+    sha256: fc7b8c444001f20261625e5c5b814968699a10c6560b5d6c6accf65289f5e6d6
+  category: main
+  optional: false
+- name: vegafusion
+  version: 2.0.3
+  manager: conda
+  platform: win-64
+  dependencies:
+    arro3-core: '>=0.4.2'
+    narwhals: '>=1.13.5'
+    packaging: ''
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://conda.anaconda.org/conda-forge/win-64/vegafusion-2.0.3-py311h0c8fe16_0.conda
+  hash:
+    md5: d082f00bc51792a74c2a72498dcd139f
+    sha256: 2be02aa78186ef8cb960a662e3b49350944ce94d7ea21a9425609d7a8920bb37
+  category: main
+  optional: false
+- name: vegafusion-python-embed
+  version: 1.6.9
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    libgcc: '>=14'
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+  url: https://conda.anaconda.org/conda-forge/linux-64/vegafusion-python-embed-1.6.9-py311h5fab662_3.conda
+  hash:
+    md5: 8b2e934d58cf4045cf49bbf41d72db88
+    sha256: 1f5944e27f1c3a504ecade6782fd83279081322a7d014c48c7d5554b3a728155
+  category: main
+  optional: false
+- name: vegafusion-python-embed
+  version: 1.6.9
+  manager: conda
+  platform: osx-64
+  dependencies:
+    __osx: '>=10.13'
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+  url: https://conda.anaconda.org/conda-forge/osx-64/vegafusion-python-embed-1.6.9-py311hb4667ed_3.conda
+  hash:
+    md5: 41495ffeed0233391bd9d48babb5bdfa
+    sha256: 3edeb4426d3884e5d5ed2699a7f3e212e227f868689e64adcb16d8c0d6cacbf4
+  category: main
+  optional: false
+- name: vegafusion-python-embed
+  version: 1.6.9
+  manager: conda
+  platform: osx-arm64
+  dependencies:
+    __osx: '>=11.0'
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/vegafusion-python-embed-1.6.9-py311hae0de28_3.conda
+  hash:
+    md5: a78536a75fac9941f26b9d9c00839e8e
+    sha256: 443a7087fffcf73bbcafe06a58a9b89e40a010b52998496e2c2851a9b7203506
+  category: main
+  optional: false
+- name: vegafusion-python-embed
+  version: 1.6.9
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://conda.anaconda.org/conda-forge/win-64/vegafusion-python-embed-1.6.9-py311h0c8fe16_3.conda
+  hash:
+    md5: 66c32e95a56694faa80f4753947ec653
+    sha256: 730043777f5a62ed5542c62ed5d2a9fe9e8f13c9bd5689dfc6d726db2311f7c3
+  category: main
+  optional: false
 - name: virtualenv
   version: 20.35.4
   manager: conda
@@ -15015,6 +15256,65 @@ package:
   hash:
     md5: cfccfd4e8d9de82ed75c8e2c91cab375
     sha256: 77193c99c6626c58446168d3700f9643d8c0dab1f6deb6b9dd039e6872781bfb
+  category: main
+  optional: false
+- name: vl-convert-python
+  version: 1.8.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    libgcc: '>=14'
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+  url: https://conda.anaconda.org/conda-forge/linux-64/vl-convert-python-1.8.0-py311h49ec1c0_1.conda
+  hash:
+    md5: 521282f4c182c7fc88345ffde079faee
+    sha256: ce767d72feaf3025a892aab6adc85865afb1ab7eb62543b80a77d7f258031c0f
+  category: main
+  optional: false
+- name: vl-convert-python
+  version: 1.8.0
+  manager: conda
+  platform: osx-64
+  dependencies:
+    __osx: '>=10.13'
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+  url: https://conda.anaconda.org/conda-forge/osx-64/vl-convert-python-1.8.0-py311hf197a57_1.conda
+  hash:
+    md5: e195a0d2c040b804e935df9c5b6c3d2d
+    sha256: 2e339d3dfe129be3e1788d6c4cef464af82266d76b8700e75e25ab51b774c86b
+  category: main
+  optional: false
+- name: vl-convert-python
+  version: 1.8.0
+  manager: conda
+  platform: osx-arm64
+  dependencies:
+    __osx: '>=11.0'
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/vl-convert-python-1.8.0-py311h9408147_1.conda
+  hash:
+    md5: 513bd2e51cafc0fa6c48e8438dae5b52
+    sha256: 605b179eed6b1740d5372689e4c54bccb521cb595239ce417f9b8222ac87d51c
+  category: main
+  optional: false
+- name: vl-convert-python
+  version: 1.8.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: '>=3.11,<3.12.0a0'
+    python_abi: 3.11.*
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://conda.anaconda.org/conda-forge/win-64/vl-convert-python-1.8.0-py311h7b6d46a_1.conda
+  hash:
+    md5: 2a6a5f34d46ade18ecb1db73c603f20f
+    sha256: ce5c564aba68d958da8805ad8bbf2a2c01dd643e106d90e8fd4d85f8f27318d5
   category: main
   optional: false
 - name: wcwidth
@@ -16751,47 +17051,7 @@ package:
 - name: narwhals
   version: 2.13.0
   manager: pip
-  platform: linux-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/87/0d/1861d1599571974b15b025e12b142d8e6b42ad66c8a07a89cb0fc21f1e03/narwhals-2.13.0-py3-none-any.whl
-  hash:
-    sha256: 9b795523c179ca78204e3be53726da374168f906e38de2ff174c2363baaaf481
-  category: main
-  optional: false
-- name: narwhals
-  version: 2.13.0
-  manager: pip
   platform: linux-aarch64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/87/0d/1861d1599571974b15b025e12b142d8e6b42ad66c8a07a89cb0fc21f1e03/narwhals-2.13.0-py3-none-any.whl
-  hash:
-    sha256: 9b795523c179ca78204e3be53726da374168f906e38de2ff174c2363baaaf481
-  category: main
-  optional: false
-- name: narwhals
-  version: 2.13.0
-  manager: pip
-  platform: osx-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/87/0d/1861d1599571974b15b025e12b142d8e6b42ad66c8a07a89cb0fc21f1e03/narwhals-2.13.0-py3-none-any.whl
-  hash:
-    sha256: 9b795523c179ca78204e3be53726da374168f906e38de2ff174c2363baaaf481
-  category: main
-  optional: false
-- name: narwhals
-  version: 2.13.0
-  manager: pip
-  platform: osx-arm64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/87/0d/1861d1599571974b15b025e12b142d8e6b42ad66c8a07a89cb0fc21f1e03/narwhals-2.13.0-py3-none-any.whl
-  hash:
-    sha256: 9b795523c179ca78204e3be53726da374168f906e38de2ff174c2363baaaf481
-  category: main
-  optional: false
-- name: narwhals
-  version: 2.13.0
-  manager: pip
-  platform: win-64
   dependencies: {}
   url: https://files.pythonhosted.org/packages/87/0d/1861d1599571974b15b025e12b142d8e6b42ad66c8a07a89cb0fc21f1e03/narwhals-2.13.0-py3-none-any.whl
   hash:
