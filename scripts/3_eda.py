@@ -13,7 +13,7 @@ from src.eda import perform_eda
 
 @click.command()
 @click.option('--input-file', '-i', 
-              default='data/processed/breast_cancer_cleaned.csv', 
+              default='data/processed/clean_train.csv', 
               help='Path to the cleaned input CSV file.')
 @click.option('--output-dir', '-o', 
               default='results', 

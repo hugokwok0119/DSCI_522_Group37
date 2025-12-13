@@ -19,6 +19,12 @@ from sklearn.compose import make_column_transformer
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report, confusion_matrix
 import altair as alt
+import sys
+# Add project root to sys.path to import src
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+if project_root not in sys.path:
+    sys.path.append(project_root)
 from src.modeling import create_svm_model
 
 

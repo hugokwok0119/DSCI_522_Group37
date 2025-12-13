@@ -22,8 +22,9 @@ dependencies:
 
   # needed for visualization (ally)
   - vl-convert-python >=1.0.0   
-  - vegafusion-python-embed >=1.4.0 
-  - vegafusion >=1.4.0              
+
+  # for vegafusion arrow support
+  - pyarrow >=14.0.0     
 
   - pip 
   - pip:
@@ -31,3 +32,4 @@ dependencies:
     - ucimlrepo
     - "deepchecks[tabular]"
     - anywidget
+    - vegafusion[embed]>=1.4.0

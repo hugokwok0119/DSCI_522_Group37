@@ -62,6 +62,8 @@ root/
 │   ├── 2_clean_data.py
 │   ├── 3_eda.py
 │   └── 4_model.py
+├── src/                    # Modular Functions
+├── test/                   # Tests for Modular Functions    
 ├── Dockerfile              # Container definition
 ├── docker-compose.yml      # Service orchestration
 ├── Makefile                # Automation commands
