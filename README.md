@@ -206,5 +206,15 @@ The data used in this project is the **Breast Cancer Wisconsin (Diagnostic) Data
 
 ## References
 
-1.  **Dua, D. and Graff, C. (2019)**. UCI Machine Learning Repository [http://archive.ics.uci.edu/ml]. Irvine, CA: University of California, School of Information and Computer Science.
-2.  **Street, W.N., Wolberg, W.H., & Mangasarian, O.L. (1993)**. Nuclear feature extraction for breast tumor diagnosis. In *Biomedical Image Processing and Biomedical Visualization* (pp. 861-870). SPIE. doi: 10.1117/12.148698.
+1.  **American Cancer Society (2007)**. Breast cancer facts & figures. American Cancer Society.
+2.  **PDQ Adult Treatment Editorial Board (2025)**. Breast Cancer Treatment (PDQ®). In *PDQ cancer information summaries [internet]*. National Cancer Institute (US).
+3.  **Dua, D. and Graff, C. (2017)**. UCI Machine Learning Repository [http://archive.ics.uci.edu/ml]. Irvine, CA: University of California, School of Information and Computer Science.
+4.  **Street, W.N., Wolberg, W.H., & Mangasarian, O.L. (1993)**. Nuclear feature extraction for breast tumor diagnosis. In *Biomedical Image Processing and Biomedical Visualization* (Vol. 1905, pp. 861-870). International Society for Optics and Photonics.
+5.  **Canadian Cancer Statistics Advisory Committee (2019)**. Canadian Cancer Statistics 2019. Toronto, ON: Canadian Cancer Society [http://cancer.ca/Canadian-Cancer-Statistics-2019-EN].
+6.  **McKinney, W. (2010)**. Data Structures for Statistical Computing in Python. In S. van der Walt & J. Millman (Eds.), *Proceedings of the 9th Python in Science Conference* (pp. 56-61). doi: 10.25080/Majora-92bf1922-00a.
+7.  **Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., et al. (2011)**. Scikit-learn: Machine Learning in Python. *Journal of Machine Learning Research*, 12(85), 2825-2830 [http://jmlr.org/papers/v12/pedregosa11a.html].
+8.  **Harris, C.R., Millman, K.J., Van Der Walt, S.J., Gommers, R., Virtanen, P., Cournapeau, D., Wieser, E., Oliphant, T.E., Haberland, M., Reddy, T., et al. (2020)**. Array programming with NumPy. *Nature*, 585(7825), 357-362. doi: 10.1038/s41586-020-2649-2.
+9.  **VanderPlas, J., Granger, B., Heer, J., Moritz, D., Wongsuphasawat, K., Satyanarayan, A., Lees, E., Timofeev, I., Welsh, B., & Sievert, S. (2018)**. Altair: Interactive Statistical Visualizations for Python. *Journal of Open Source Software*, 3(32), 1057. doi: 10.21105/joss.01057 [https://doi.org/10.21105/joss.01057].
+10.  **Van Rossum, G. and Drake, F.L. (2009)**. Python 3 Reference Manual. Scotts Valley, CA: CreateSpace.
+11.  **Docker, Inc. (2024)**. Docker: Lightweight Linux Containers for Consistent Development and Deployment [https://www.docker.com/].
+12.  **Cortes, C. and Vapnik, V. (1995)**. Support-vector networks. *Machine Learning*, 20(3), 273-297
