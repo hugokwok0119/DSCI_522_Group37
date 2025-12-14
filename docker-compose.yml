@@ -13,4 +13,4 @@ services:
     stdin_open: true
     tty: true
     environment:
-      - LD_LIBRARY_PATH=/opt/conda/envs/dockerlock/lib
+      - LD_LIBRARY_PATH=/opt/conda/envs/MDS_Group37/lib
